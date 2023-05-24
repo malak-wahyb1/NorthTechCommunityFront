@@ -3,9 +3,9 @@ import axios from "axios";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import Comment from "@mui/icons-material/Comment";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./post.css";
-import e from "express";
 
 function Post(props) {
   const [style, setStyle] = useState("cont");
@@ -15,6 +15,9 @@ function Post(props) {
   const [open, setOpen] = useState("close");
   const [commentClicked, setCommentClicked] = useState(false);
   const [content, setContent] = useState("");
+  const [comments, setComments] = useState([]);
+
+
   const handleCommentSubmit = () => {
     if (content.trim() === "") {
       return;
@@ -39,6 +42,15 @@ function Post(props) {
     setOpen("comments");
     if (commentClicked) {
       setOpen("comments");
+      axios
+        .get(`http://localhost:5000/comment/user/${user._id}/${props.post._id}`)
+        .then((response) => {
+      console.log(response.data)
+          setComments(response.data.message);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       setOpen("close");
     }
@@ -119,7 +131,7 @@ function Post(props) {
           <a>
             <img
               className="profile-pic"
-              src="https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-1/p320x320/15181_10152546593877801_7195567909714140576_n.png?oh=bdab6394098ec9afbdf619bb17f155b9&oe=5893B18E"
+              src={`http://localhost:5000/${props.post.user.media}`}
               alt=""
             />
           </a>
@@ -156,6 +168,23 @@ function Post(props) {
           </div>
         </div>
         <div class={open}>
+          {comments.map((comment, i) =>{
+            return( <ul class="commentList">
+            <li>
+              <div class="commenterImage">
+                <img src={`http://localhost:5000/${comment.user.media}`} alt="" />
+              </div>
+              <div class="commentText">
+                <span className="name-user-comment">{comment.user.first_name} {comment.user.last_name}</span>
+                <p class="">{comment.content}</p>{" "}
+                <span class="date sub-text">{comment.created_at}</span>
+              </div>
+            </li>
+         
+        
+          </ul>)
+          })}
+         
           <div className="commentBox">
             <img
               src={`http://localhost:5000/${user.media}`}
@@ -164,6 +193,7 @@ function Post(props) {
             />
             <input
               placeholder="Write a comment..."
+              value={content}
               onChange={(e) => {
                 setContent(e.target.value);
               }}
@@ -172,7 +202,9 @@ function Post(props) {
           </div>
           <div class="commentHelper">
             <div class="icon comment"></div>
-            <a href="#">View All comments</a>
+
+  
+            <Link to={`/user/post/${props.post._id}`}>View All comments</Link>
           </div>
         </div>
       </div>

@@ -11,4 +11,10 @@ body {
   background-color: var(--primary);
   font-family: "Rockwell", Helvetica, sans-serif;
 overflow: hidden;
+color:var(--secondary)
+}
+.event{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

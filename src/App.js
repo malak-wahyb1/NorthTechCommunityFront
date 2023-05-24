@@ -6,6 +6,8 @@ import Event from "./pages/event/event";
 import Home from "./pages/home/home";
 import LoginPage from "./pages/login/login";
 import Friend from "./pages/myFriend/myFriend";
+import SinglePost from "./pages/singlePost/singlePost";
+import Workspace from "./pages/workspace/workspace";
 import AdminRoute from "./route/admin";
 import VisitorRoute from "./route/visitor";
 
@@ -22,6 +24,10 @@ function App() {
           <Route path="/user/home" element={<Home />}/>
           <Route path="/user/friend" element={<Friend/>}/>
           <Route path="/user/event" element={<Event/>}/>
+          <Route path="/user/workspace" element={<Workspace/>}/>
+
+          <Route path="/user/post/:postId" element={<SinglePost/>}/>
+
 
 
         </Route>

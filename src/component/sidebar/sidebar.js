@@ -34,7 +34,7 @@ function SideBar() {
               </svg>
               Event
             </Link>
-            <Link className="sidebar-link" href="#">
+            <Link className="sidebar-link" to="/user/workspace">
               <svg viewBox="0 0 24 24" fill="currentColor">
                <WorkspacesIcon/>
               </svg>

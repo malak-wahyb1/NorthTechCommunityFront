@@ -1,7 +1,20 @@
 import "./friend.css";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-function FriendComponent() {
+import { Link } from "react-router-dom";
+import axios from "axios";
+function FriendComponent(props) {
+  const acceptFriend=()=>{
+    axios.put(`http://localhost:5000/friend/${props.friend._id}`,{accepted:true}).then((friend)=>{
+      console.log(friend)
+    }).catch((err)=>{console.log(err)})
+  }
+  const deleteRequest=()=>{
+     axios.delete(`http://localhost:5000/friend/${props.friend._id}`).then((response)=>{
+      console.log(response)
+     }).catch((err)=>{console.log(err)})
+  }
+ 
   return (
     <>
       <figure class="snip1218">
@@ -14,17 +27,17 @@ function FriendComponent() {
         </div>
         <figcaption>
           <h3>
-            Ingredia<span> Nutrisha</span>
+            {props.friend.friend.first_name}<span> {props.friend.friend.last_name}</span>
           </h3>
-          <h5>Artist</h5>
+          <h5>{props.friend.created_at}</h5>
           <div class="icons">
-            <a href="#">
+            <Link onClick={acceptFriend}>
               <i class="ion-social-reddit-outline"><DoneIcon/></i>
-            </a>
-            <a href="#">
+            </Link>
+            <Link onClick={deleteRequest}>
               {" "}
               <i class="ion-social-twitter-outline"><CloseOutlinedIcon/></i>
-            </a>
+            </Link>
           
           </div>
         </figcaption>

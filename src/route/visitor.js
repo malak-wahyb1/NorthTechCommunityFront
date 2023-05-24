@@ -1,12 +1,16 @@
 import { Outlet } from "react-router-dom"
 import Header from "../component/header/header"
 import SideBar from "../component/sidebar/sidebar"
-
+import { useSelector } from "react-redux"
+import Unhautorized from "../component/unhotorized/unhhautorized"
 function VisitorRoute(){
+  const token=useSelector(state=>state.token)
 return(
     <>
-      <section className="home">
-      <section className="home-container">
+     
+        {token?(
+           <section className="home">
+        <section className="home-container">
         <SideBar />
         <section className="wrapper">
         <Header/>
@@ -16,9 +20,10 @@ return(
         </section>
        
         </section>
-       
-      </section>
-    </section>
+        </section>
+      </section>):(<Unhautorized/>)}
+      
+  
   
     </>
 )

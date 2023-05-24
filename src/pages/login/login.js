@@ -5,44 +5,75 @@ import axios from "axios";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { toast } from "react-hot-toast";
-import { useDispatch } from 'react-redux';
-import { storeToken, storeUser } from "../../redux/reducer";
+import { useDispatch } from "react-redux";
+import { storeUser } from "../../redux/reducer";
+import { storeToken } from "../../redux/reducer";
 function LoginPage() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [value, setValue] = useState();
+ 
   const [signUp, setSignUp] = useState([]);
   const location = useLocation();
-  const { from } = location.state || { from: { pathname: "/user/home" } };
+  const { from: { pathname: home } = { pathname: "/user/home" } } =
+    location.state || {};
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSignIn = () => {
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    loginRequest();
+  };
+  const loginRequest = () => {
     axios
       .post(`http://localhost:5000/user/login`, { email, password })
-
       .then((response) => {
+        navigate(home);
+
         const user = response.data.user;
         dispatch(storeUser(user));
-        navigate(from);
-        console.log(response.data.user.first_name);
+        dispatch(storeToken(response.data.token));
       })
       .catch((error) => {
-       
+        console.log(error);
+        const err = error.response.data.message;
+        toast.error(err, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
   };
   const handleChange = (e) => {
-    setSignUp({ [e.target.name]: e.target.value });
+    setSignUp((prevSignUp) => ({
+      ...prevSignUp,
+      [e.target.name]: e.target.value,
+    }));
   };
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    console.log(signUp);
     axios
-      .post(`http://localhost:5000/user`, { signUp })
+      .post(`http://localhost:5000/user`, signUp )
       .then((response) => {
-        console.log(response);
-        toast.success("signup successful")
+        console.log(response.data.message);
+        if (response.data.token) { 
+          const user1 = response.data.message;
+          dispatch(storeUser(user1));
+          dispatch(storeToken(response.data.token));
+        }
+        
+        toast.error(response.data.message, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        console.log(error);
       });
   };
   const handleSignUpClick = () => {
@@ -114,21 +145,20 @@ function LoginPage() {
             <PhoneInput
               placeholder="Enter phone number"
               defaultCountry="LB"
-              value={value}
-             onChange={setValue}
             
+              onChange={(newValue) => {
+                setSignUp((prevSignUp) => ({
+                  ...prevSignUp,
+                  phone: newValue,
+                }));
+              }}
             />
 
             <button type="submit">Sign Up</button>
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form
-            action="#"
-            onSubmit={() => {
-              handleSignIn();
-            }}
-          >
+          <form onSubmit={(e) => handleSignIn(e)}>
             <h1>Sign in</h1>
             <div className="social-container"></div>
 
@@ -150,14 +180,7 @@ function LoginPage() {
             <Link href="#" className="forgot-password">
               Forgot your password?
             </Link>
-            <button
-              onClick={() => {
-                handleSignIn();
-              }}
-              type="submit"
-            >
-              Sign In
-            </button>
+            <button type="submit">Sign In</button>
           </form>
         </div>
         <div className="overlay-container">

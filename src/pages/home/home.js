@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import PostShare from "../../component/addPost/addpost";
 import Post from "../../component/post/post";
 
 import "./home.css";
@@ -14,6 +15,7 @@ function Home() {
 
   return (
     <>
+    <PostShare/>
      {post.map((post)=>{
       return(
         <Post post={post}/>

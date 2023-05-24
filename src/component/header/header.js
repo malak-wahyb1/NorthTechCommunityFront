@@ -1,10 +1,10 @@
 import './header.css'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useSelector } from 'react-redux';
+import UserProfile from '../userProfile';
 
 function Header(){
     const users=useSelector(state=>state.user)
-    console.log(users)
+
 return(
    <>
    <div class="wrapper">
@@ -15,9 +15,9 @@ return(
    <div class="user-settings">
     <img class="user-img" src={`http://localhost:5000/${users.media}`} alt=""/>
     <div class="user-name">{users.first_name}</div>
-    <svg viewBox="0 0 492 492" fill="currentColor">
-        <ArrowDropDownIcon/>
-    </svg>
+  
+     <UserProfile/>
+
     <div class="notify">
      <div class="notification"></div>
      <svg viewBox="0 0 24 24" fill="currentColor">0

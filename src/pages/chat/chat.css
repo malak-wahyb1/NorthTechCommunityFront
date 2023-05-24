@@ -855,5 +855,10 @@ body[data-theme="dark"] {
 
   .app-main {
     height: calc(100% - 48px);
-  }
+  }}
+.newgroup{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+ 
 }
