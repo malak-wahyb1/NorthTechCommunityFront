@@ -4,6 +4,7 @@
   --button-bg: #353340;
   --accent: #15bab3;
   --border-color: rgb(128 129 145 / 24%);
+  --swiper-theme-color:#15bab3 !important;
 }
 
 body {
@@ -17,4 +18,35 @@ color:var(--secondary)
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.MuiList-root ,.MuiList-root li {
+  background-color: var(--primary);
+  color:white;
+}
+.css-1x51dt5-MuiInputBase-input-MuiInput-input:focus::after{
+  border-color:  #15bab3;
+
+}
+.css-l4u8b9-MuiInputBase-root-MuiInput-root:after{
+  border-color:  #15bab3;
+}
+
+.css-l4u8b9-MuiInputBase-root-MuiInput-root:after{
+  border-bottom: 2px solid #15bab3 !important;
+}
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+color:#15bab3 !important;
+}
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root{
+  color: var(--border-color) !important;
+}
+.css-hlj6pa-MuiDialogActions-root>:not(:first-of-type),.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
+  color: white !important;
+}
+.css-hlj6pa-MuiDialogActions-root>:not(:first-of-type):hover,.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover{
+background-color: #15bab3 !important;
+}
+
+.MuiTouchRipple-root:hover{
+  background-color: transparent !important;
 }

@@ -3,11 +3,19 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 export default function UserProfile() {
+  const users = useSelector(state => state.user);
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
- 
+  const location = useLocation();
+  const { from: { pathname: login } = { pathname: "/" } } =
+    location.state || {};
+  const navigate = useNavigate();
     const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -15,7 +23,9 @@ export default function UserProfile() {
     setAnchorEl(null);
   };
 const lougout=()=>{
-    localStorage.removeItem("userInfo");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token")
+    navigate(login)
     setAnchorEl(null);
     
 }
@@ -41,9 +51,10 @@ const lougout=()=>{
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
+   
       >
-        {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-        <MenuItem onClick={handleClose}>My Profile</MenuItem>
+       
+        <MenuItem onClick={handleClose} ><Link to={`/user/${users._id}`}>My Profile</Link></MenuItem>
         <MenuItem onClick={lougout} >Logout</MenuItem>
       </Menu>
     </div>

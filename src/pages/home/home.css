@@ -52,3 +52,7 @@
 .post-body::-webkit-scrollbar-thumb {
   background-color: var(--accent);
 }
+.css-t89xny-MuiDataGrid-columnHeaderTitle{
+  font-size: 18px;
+  text-align: center;
+}

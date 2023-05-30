@@ -3,12 +3,13 @@ import { ChatBubbleOutline } from "@mui/icons-material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { storeChat, storeSelectedChat } from "../../redux/reducer";
 import Friend from "../friend";
-import Group from "../group";
-import GroupInfo from "../groupInfo";
+
 import { getImage, getSender } from "../logic";
+
 
 function MyChats() {
   const user = useSelector((state) => state.user);
@@ -23,7 +24,7 @@ function MyChats() {
     const user1 = user._id;
     console.log(user1);
     axios
-      .get(`http://localhost:5000/chat?user1=${user1}`)
+      .get(`https://northtechcommunity3.onrender.com/chat?user1=${user1}`)
       .then((response) => {
         console.log(response);
         setChat(response.data);
@@ -46,7 +47,9 @@ function MyChats() {
               <ChatBubbleOutline />
             </svg>
           </div>
-          <h1>North Tech Community</h1>
+          <h1>
+            <Link to="/user/home">North Tech Community</Link>
+          </h1>
         </div>
         <div className="app-profile-box">
           {selectedChat ? (
@@ -65,14 +68,13 @@ function MyChats() {
                 }
                 alt="chat"
               />
-              {selectedChat.isGroupChat?<GroupInfo users={selectedChat.user} name={selectedChat.chatName}/>:null}
+            
             </>
           ) : null}
         </div>
         <div className="chat-list-wrapper">
           <section className="newgroup">
             <Friend />
-            <Group />
           </section>
 
           <div className="chat-list-header">
@@ -124,7 +126,7 @@ function MyChats() {
                 }`}
                 onClick={() => setSelectedChat(newchat)}
               >
-                <img src={`http://localhost:5000/${newchat.media}`} alt="" />
+                <img src={`https://northtechcommunity3.onrender.com/${newchat.media}`} alt="" />
                 <span className="chat-list-name">{newchat.first_name}</span>
               </li>
             ) : null}
@@ -134,5 +136,4 @@ function MyChats() {
     </>
   );
 }
-
 export default MyChats;

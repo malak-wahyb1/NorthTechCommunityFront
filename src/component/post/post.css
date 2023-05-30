@@ -13,6 +13,7 @@ header a{
   margin-left: 10px;
 }
 .status {
+  font-size: 18px;
   margin: 11px 0;
   color:var(--secondary)
 }
@@ -36,8 +37,8 @@ header a{
 }
 
 .profile-pic {
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   flex-shrink: 0;
   -o-object-fit: cover;
   object-fit: cover;
@@ -51,7 +52,7 @@ header a{
 
 .name {
   color: var(--accent);
-  font-size: 15px;
+  font-size: 20px;
   margin-bottom: 5px;
 }
 
@@ -61,22 +62,28 @@ header a{
 }
 
 main {
-  font-size: 13px;
+  font-size: 15px;
 }
 
-main .status {
-  margin-bottom: 11px;
-}
 
+.post-content{
+  width: 90%;
+  margin: auto;
+}
 .img-content {
   width: 100%;
-  margin-bottom: 11px;
+  margin: auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
+.borderTop{
+  width: 90%;
+  margin: 1pc auto;
+  border-top: 1px solid var(--button-bg);
+}
 .action a {
   color: #7f7f7f;
   display: flex;
+  margin-left: 36%;
   align-items: flex-start;
 }
 

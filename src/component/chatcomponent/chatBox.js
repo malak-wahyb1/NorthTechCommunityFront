@@ -5,7 +5,7 @@ import ScrollableFeed from "react-scrollable-feed";
 import { isLastMessage, isSameSender } from "../logic";
 import React from "react";
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://northtechcommunity3.onrender.com";
 var socket, selectedChatCompare;
 function ChatBox() {
   const selectedChat = useSelector((state) => state.selectedChat);
@@ -37,7 +37,7 @@ function ChatBox() {
     }
 
     axios
-      .get(`http://localhost:5000/message/${selectedChat._id}`)
+      .get(`https://northtechcommunity3.onrender.com/message/${selectedChat._id}`)
       .then((response) => {
         setChats(response.data.message);
         socket.emit('join chat',selectedChat)
@@ -49,7 +49,7 @@ function ChatBox() {
 
   const handleSendMessage = () => {
     axios
-      .post(`http://localhost:5000/message`, {
+      .post(`https://northtechcommunity3.onrender.com/message`, {
         sender: user._id,
         content: message,
         chatId: selectedChat._id,
@@ -83,7 +83,7 @@ function ChatBox() {
                     <div className="message-wrapper">
                       <img
                         className="message-pp"
-                        src={`http://localhost:5000/${m.sender.media}`}
+                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
                         alt="profile-pic"
                       />
                       <div className="message-box-wrapper">
@@ -95,7 +95,7 @@ function ChatBox() {
                   <div className="message-wrapper reverse">
                     <img
                       className="message-pp"
-                      src={`http://localhost:5000/${m.sender.media}`}
+                      src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
                       alt="profile-pic"
                     />
                     <div className="message-box-wrapper">

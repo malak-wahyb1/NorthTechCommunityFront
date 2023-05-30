@@ -5,14 +5,20 @@ import LinkIcon from "@mui/icons-material/Link";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-const EventComponent = () => {
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { Link } from "react-router-dom";
+import DeleteComponent from "../editpost";
+
+const EventComponent = (props) => {
+  console.log(props)
+ 
   return (
     <div className="blog-slider">
       <div className="blog-slider__wrp swiper-wrapper">
         <div className="blog-slider__item swiper-slide">
           <div className="blog-slider__img">
             <img
-              src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
+              src={`https://northtechcommunity3.onrender.com/${props.event.media}`}
               alt=""
             />
           </div>
@@ -22,67 +28,72 @@ const EventComponent = () => {
                 src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
                 alt=""
               />{" "}
-              <span>Malak wahyb</span>
+              <span>{props.event.posted.first_name} {props.event.posted.last_name}</span>
             </div>
-            <div className="blog-slider__title">Lorem Ipsum Dolor</div>
+            <div className="blog-slider__title">{props.event.event_name} <DeleteComponent url="event" Id={props.event._id} title="event"/></div>
             <span className="blog-slider__code">
               <DateRangeIcon />
-              <span>26 December 2019</span>
+              <span>{props.event.date.split('T')[0]}</span>
+            </span>
+            <span className="blog-slider__code">
+              <AccessTimeIcon />
+              <span>{props.event.date.split('T')[0]}</span>
             </span>
             <span className="blog-slider__code">
               <LocationOnIcon />
-              <span>akkar</span>
+              <span>{props.event.address}</span>
             </span>
-            <span className="blog-slider__code">
+            {props.event.event_links?( <span className="blog-slider__code">
               <LinkIcon />
               <span>
-                https://mui.com/material-ui/material-icons/?query=address
+              {props.event.event_links}
               </span>
-            </span>
+            </span>):null}
+           
 
-            <a href="#" className="blog-slider__button">
+            <Link href="#" className="blog-slider__button">
               <StarBorderIcon />
               interested
-            </a>
+            </Link>
             <div className="speaker_wrapp">
               {" "}
               Speakers:
               <div className="speaker">
-                <a>
+                <Link>
                   <img
                     src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
                     alt=""
                   />
                  
-                </a>
-                <a>
+                </Link>
+                <Link>
                   <img
                     src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
                     alt=""
                   />
                  
-                </a>
-                <a>
+                </Link>
+                <Link>
                   <img
                     src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
                     alt=""
                   />
                  
-                </a>
-                <a>
+                </Link>
+                <Link>
                   <img
                     src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
                     alt=""
                   />
                  
-                </a>
-                <a>
+                </Link>
+                <Link>
                   <img
                     src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
                     alt=""
                   />
                  
-                </a>
+                </Link>
               </div>
             </div>
           </div>

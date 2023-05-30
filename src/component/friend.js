@@ -51,7 +51,7 @@ function SimpleDialog(props) {
 
   React.useEffect(() => {
     axios
-      .get(`http://localhost:5000/friend/${user._id}`)
+      .get(`https://northtechcommunity3.onrender.com/friend/${user._id}`)
       .then((response) => {
         console.log(response.data.message.docs);
         setFriend1(response.data.message.docs);
@@ -61,7 +61,8 @@ function SimpleDialog(props) {
       });
   }, [user._id]);
 
-  const filteredFriends = friend1.filter((first_name) =>
+if(friend1){
+    const filteredFriends = friend1.filter((first_name) =>
     Friendacc(user, first_name.friend)
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
@@ -85,7 +86,6 @@ function SimpleDialog(props) {
           onChange={handleSearchInputChange}
         />
 
-        {/* Conditionally render friend list based on search state */}
         {isSearching ? (
           filteredFriends.map((email) => (
             <ListItem disableGutters>
@@ -114,7 +114,7 @@ function SimpleDialog(props) {
       </List>
     </Dialog>
   );
-}
+}}
 
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
@@ -140,6 +140,8 @@ export default function Friend() {
       <Button variant="outlined" onClick={handleClickOpen}>
         New Chat
       </Button>
+  
+
       <SimpleDialog
         selectedValue={selectedValue}
         open={open}

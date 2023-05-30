@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./login.css";
 import axios from "axios";
@@ -12,7 +12,8 @@ function LoginPage() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
- 
+const [loginClass, setLoginClass] = useState("form-container sign-in-container")
+const [signUpClass, setSignUpClass] = useState("form-container sign-up-container")
   const [signUp, setSignUp] = useState([]);
   const location = useLocation();
   const { from: { pathname: home } = { pathname: "/user/home" } } =
@@ -23,20 +24,28 @@ function LoginPage() {
     e.preventDefault();
     loginRequest();
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/user/home");
+    }
+  }, [navigate]);
   const loginRequest = () => {
     axios
-      .post(`http://localhost:5000/user/login`, { email, password })
+      .post(`https://northtechcommunity3.onrender.com/user/login`, { email, password })
       .then((response) => {
         navigate(home);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        const user = response.data.user;
-        dispatch(storeUser(user));
+        dispatch(storeUser(response.data.user));
         dispatch(storeToken(response.data.token));
       })
       .catch((error) => {
-        console.log(error);
-        const err = error.response.data.message;
-        toast.error(err, {
+       
+      
+        toast.error("try again", {
           style: {
             borderRadius: "10px",
             background: "#333",
@@ -45,6 +54,10 @@ function LoginPage() {
         });
       });
   };
+  const handlelink=()=>{
+setLoginClass("hidden")
+setSignUpClass("showing")
+  }
   const handleChange = (e) => {
     setSignUp((prevSignUp) => ({
       ...prevSignUp,
@@ -55,22 +68,17 @@ function LoginPage() {
     e.preventDefault();
     console.log(signUp);
     axios
-      .post(`http://localhost:5000/user`, signUp )
+      .post(`https://northtechcommunity3.onrender.com/user`, signUp)
       .then((response) => {
-        console.log(response.data.message);
-        if (response.data.token) { 
-          const user1 = response.data.message;
-          dispatch(storeUser(user1));
+        console.log(response);
+        if (response.data.token) {
+          navigate(home);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.message));
+
+          dispatch(storeUser(response.data.message));
           dispatch(storeToken(response.data.token));
         }
-        
-        toast.error(response.data.message, {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
       })
       .catch((error) => {
         console.log(error);
@@ -99,7 +107,7 @@ function LoginPage() {
       <div
         className={`container ${isSignUpActive ? "right-panel-active" : ""}`}
       >
-        <div className="form-container sign-up-container">
+        <div className={signUpClass}>
           <form onSubmit={handleSignUp}>
             <h1>Create Account</h1>
             <input
@@ -145,7 +153,6 @@ function LoginPage() {
             <PhoneInput
               placeholder="Enter phone number"
               defaultCountry="LB"
-            
               onChange={(newValue) => {
                 setSignUp((prevSignUp) => ({
                   ...prevSignUp,
@@ -157,7 +164,7 @@ function LoginPage() {
             <button type="submit">Sign Up</button>
           </form>
         </div>
-        <div className="form-container sign-in-container">
+        <div className={loginClass}>
           <form onSubmit={(e) => handleSignIn(e)}>
             <h1>Sign in</h1>
             <div className="social-container"></div>
@@ -177,9 +184,8 @@ function LoginPage() {
                 setPassword(e.target.value);
               }}
             />
-            <Link href="#" className="forgot-password">
-              Forgot your password?
-            </Link>
+            <Link className="signUpLink" onClick={handlelink}>You don't have account,Sign up now!</Link>
+      
             <button type="submit">Sign In</button>
           </form>
         </div>

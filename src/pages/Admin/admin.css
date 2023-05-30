@@ -1,0 +1,45 @@
+.adminAcc {
+  width: 90%;
+
+  margin: 5pc auto;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+}
+.css-128fb87-MuiDataGrid-toolbarContainer,
+.css-levciy-MuiTablePagination-displayedRows,
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root,
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar
+  .MuiTablePagination-actions {
+  color: var(--accent);
+}
+
+.css-y6rp3m-MuiButton-startIcon {
+  color: var(--accent);
+}
+
+.css-128fb87-MuiDataGrid-toolbarContainer button {
+  color: var(--accent);
+}
+.css-128fb87-MuiDataGrid-toolbarContainer button:last-child {
+  color: var(--accent);
+}
+.css-128fb87-MuiDataGrid-toolbarContainer button:last-child:hover {
+  color: var(--accent);
+}
+.MuiAutocomplete-hasPopupIcon.css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root, .MuiAutocomplete-hasClearIcon.css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root .MuiInputBase-input .MuiOutlinedInput-notchedOutline .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+  background-color: var(--inputColor);
+  border-radius: 18px;
+  padding: 10px;
+  color: white;
+  font-size: 17px;
+  border: none;
+  outline: none;
+  width: 100%;
+  border: 1px solid var(--button-bg);
+}
+.MuiPopper-root{
+  background-color: var(--primary);
+}
+.css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag{
+  color: white;
+}

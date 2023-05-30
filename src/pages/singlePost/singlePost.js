@@ -19,22 +19,22 @@ function SinglePost(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/post/${postId}`)
+      .get(`https://northtechcommunity3.onrender.com/post/${postId}`)
       .then((response) => {
         setUser(response.data.message.user);
         setPost(response.data.message);
       })
       .catch((error) => {});
     axios
-      .get(`http://localhost:5000/like/${postId}`)
+      .get(`https://northtechcommunity3.onrender.com/like/${postId}`)
       .then((response) => {
         setLikesNb(response.data.message);
       })
       .catch((error) => {});
       axios
-      .get(`http://localhost:5000/comment/${postId}`)
+      .get(`https://northtechcommunity3.onrender.com/comment/${postId}`)
       .then((response) => {
-        console.log(response);
+     
         setComments(response.data.message);
       })
       .catch((error) => {
@@ -51,9 +51,10 @@ function SinglePost(props) {
       post: postId,
     };
     axios
-      .post("http://localhost:5000/comment", commentBack)
+      .post("https://northtechcommunity3.onrender.com/comment", commentBack)
       .then((response) => {
         console.log(response);
+        setComments([...comments,response.data.message])
         setContent("");
       })
       .catch((error) => {
@@ -79,7 +80,7 @@ function SinglePost(props) {
 
       const likeData = { post: postId, user: currentUser._id };
       axios
-        .post("http://localhost:5000/like", likeData)
+        .post("https://northtechcommunity3.onrender.com/like", likeData)
         .then((response) => {
           console.log(response);
           localStorage.setItem(`liked_${postId}`, "true");
@@ -89,7 +90,7 @@ function SinglePost(props) {
         });
     } else {
       axios
-        .delete(`http://localhost:5000/like/${currentUser._id}/${postId}`)
+        .delete(`https://northtechcommunity3.onrender.com/like/${currentUser._id}/${postId}`)
         .then((response) => {
           console.log(response);
         })
@@ -124,7 +125,7 @@ function SinglePost(props) {
             <a>
               <img
                 className="profile-pic"
-                src="://scontent-atl3-1.xx.fbcdn.net/v/t1.0-1/p320x320/15181_10152546593877801_7195567909714140576_n.png?oh=bdab6394098ec9afbdf619bb17f155b9&oe=5893B18E"
+                src={`https://northtechcommunity3.onrender.com/${user.media}`}
                 alt=""
               />
             </a>
@@ -140,7 +141,7 @@ function SinglePost(props) {
           <p className="status">{post.description}</p>
           <img
             className="img-content"
-            src={`http://localhost:5000/${post.media}`}
+            src={`https://northtechcommunity3.onrender.com/${post.media}`}
             alt=""
           />
 
@@ -168,7 +169,7 @@ function SinglePost(props) {
                     <li>
                       <div class="commenterImage">
                         <img
-                          src={`http://localhost:5000/${comment.user.media}`}
+                          src={`https://northtechcommunity3.onrender.com/${comment.user.media}`}
                           alt=""
                         />
                       </div>
@@ -186,7 +187,7 @@ function SinglePost(props) {
 
             <div className="commentBox">
               <img
-                src={`http://localhost:5000/${user.media}`}
+                src={`https://northtechcommunity3.onrender.com/${user.media}`}
                 alt=""
                 className="user-img"
               />

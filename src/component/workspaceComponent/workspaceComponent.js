@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "swiper/swiper-bundle.min.css";
-import DescriptionIcon from '@mui/icons-material/Description';
+import DescriptionIcon from "@mui/icons-material/Description";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-
+import axios from "axios";
 
 const WorkspaceComponent = () => {
+  useEffect(() => {
+    axios.get("https://northtechcommunity3.onrender.com/workspace").then((response) => {
+      console.log(response);
+    }).catch((error)=>{
+      console.log(error);
+    });
+  }, []);
   return (
     <div className="blog-slider">
       <div className="blog-slider__wrp swiper-wrapper">
@@ -25,21 +31,15 @@ const WorkspaceComponent = () => {
               <span>Malak wahyb</span>
             </div>
             <div className="blog-slider__title">Lorem Ipsum Dolor</div>
-    
+
             <span className="blog-slider__code">
               <LocationOnIcon />
               <span>akkar</span>
             </span>
             <span className="blog-slider__code">
               <DescriptionIcon />
-              <span>
-               description
-              </span>
+              <span>description</span>
             </span>
-
-           
-           
-        
           </div>
         </div>
       </div>

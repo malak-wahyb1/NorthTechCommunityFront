@@ -50,11 +50,7 @@
   flex-shrink: 0;
   color: var(--accent);
 }
-@media screen and (max-width: 575px) {
-  .user-settings svg {
-    display: none;
-  }
-}
+
 .user-settings .notify {
   position: relative;
 }

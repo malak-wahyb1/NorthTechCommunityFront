@@ -79,7 +79,7 @@ button.ghost {
 .login_page input {
   background-color: var(--primary);
   border: 1px solid var(--accent);
-  color:var(--secondary);
+  color: var(--secondary);
   padding: 12px 15px;
   margin: 15px 0;
   outline: none;
@@ -103,19 +103,19 @@ button.ghost {
   height: 100%;
   transition: all 0.6s ease-in-out;
 }
-.siginupname{
+.siginupname {
   display: flex;
   justify-content: space-between;
 }
 .siginupname input {
   width: 40%;
 }
-.PhoneInput{
+.PhoneInput {
   border: 1px solid var(--accent);
   width: 100%;
   padding-left: 3px;
 }
-.PhoneInput input{
+.PhoneInput input {
   border: 0;
   margin: 2px 0;
 }
@@ -124,8 +124,8 @@ button.ghost {
   width: 50%;
   z-index: 2;
 }
-.container button{
-    cursor: pointer;
+.container button {
+  cursor: pointer;
 }
 
 .container.right-panel-active .sign-in-container {
@@ -369,4 +369,62 @@ button.ghost {
   -webkit-transform: rotate(-55deg);
   transform: rotate(-55deg);
   background-color: #15bab3;
+}
+.signUpLink{
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .login_page {
+    padding: 40px;
+    height: auto;
+  }
+
+  .container {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .form-container {
+    position: static;
+    transition: none;
+  }
+
+  .sign-in-container,
+  .sign-up-container {
+    width: 100%;
+    opacity: 1;
+    transform: none;
+    z-index: 2;
+  }
+  .sign-up-container{
+    display: none;
+  }
+
+  .overlay-container 
+  .overlay     {
+ display: none;
+  }
+  
+  .hidden{
+    display: none;
+  }
+  
+.showing{
+  display: block !important;
+}
+  
+  .login_page h1{
+    font-size: 20px;
+    margin-top: 1pc;
+  }
+  .signUpLink{
+display: block;
+  }
+  .login_page{
+    position: static;
+  }
+  .login_page button{
+    margin-bottom: 1pc;
+  }
 }
