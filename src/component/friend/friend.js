@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 function FriendComponent(props) {
   const acceptFriend=()=>{
-    axios.put(`https://northtechcommunity3.onrender.com/friend/${props.friend._id}`,{accepted:true}).then((friend)=>{
+    axios.put(`https://northtechcommunitymalakwahyb.onrender.com/friend/${props.friend._id}`,{accepted:true}).then((friend)=>{
       console.log(friend)
     }).catch((err)=>{console.log(err)})
   }
   const deleteRequest=()=>{
-     axios.delete(`https://northtechcommunity3.onrender.com/friend/${props.friend._id}`).then((response)=>{
+     axios.delete(`https://northtechcommunitymalakwahyb.onrender.com/friend/${props.friend._id}`).then((response)=>{
       console.log(response)
      }).catch((err)=>{console.log(err)})
   }

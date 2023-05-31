@@ -10,7 +10,7 @@ export default function Speaker({ onSpeakerChange }) {
 
   React.useEffect(() => {
     axios
-      .get('https://northtechcommunity3.onrender.com/user')
+      .get('https://northtechcommunitymalakwahyb.onrender.com/user')
       .then((response) => {
         const speakersData = response.data.message;
         if (Array.isArray(speakersData)) {

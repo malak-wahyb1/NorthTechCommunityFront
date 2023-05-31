@@ -35,7 +35,7 @@ export default function FormComponent(props) {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `https://northtechcommunity3.onrender.com/${props.url}`,
+        `https://northtechcommunitymalakwahyb.onrender.com/${props.url}`,
         inputValues
       );
 
@@ -57,7 +57,7 @@ export default function FormComponent(props) {
       form.append("media", image);
       try {
         const response = await axios.put(
-          `https://northtechcommunity3.onrender.com/${props.url}`,
+          `https://northtechcommunitymalakwahyb.onrender.com/${props.url}`,
           form
         );
 

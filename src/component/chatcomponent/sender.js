@@ -6,7 +6,7 @@ return (
     <>
        <div className="app-profile-box">
             <img
-              src={`https://northtechcommunity3.onrender.com/${user.media}`}
+              src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
               alt="profile"
             />
             <p className="app-profile-box-title name">

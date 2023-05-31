@@ -32,7 +32,7 @@ const PostShare = () => {
    if(media) form.append("media", media);
     form.append("user", users._id);
     axios
-      .post("https://northtechcommunity3.onrender.com/post", form)
+      .post("https://northtechcommunitymalakwahyb.onrender.com/post", form)
       .then((response) => {
         toast.success("Post added successfully", {
           style: {
@@ -57,7 +57,7 @@ const PostShare = () => {
   };
   return (
     <div className="PostShare">
-      <img src={`https://northtechcommunity3.onrender.com/${users.media}`} alt="" />
+      <img src={`https://northtechcommunitymalakwahyb.onrender.com/${users.media}`} alt="" />
 
       <div>
         <form onSubmit={handleSubmitPost}>

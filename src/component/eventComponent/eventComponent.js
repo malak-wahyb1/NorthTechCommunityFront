@@ -18,7 +18,7 @@ const EventComponent = (props) => {
         <div className="blog-slider__item swiper-slide">
           <div className="blog-slider__img">
             <img
-              src={`https://northtechcommunity3.onrender.com/${props.event.media}`}
+              src={`https://northtechcommunitymalakwahyb.onrender.com/${props.event.media}`}
               alt=""
             />
           </div>

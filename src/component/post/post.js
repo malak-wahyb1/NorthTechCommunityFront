@@ -37,7 +37,7 @@ function Post(props) {
       post: props.post._id,
     };
     axios
-      .post("https://northtechcommunity3.onrender.com/comment", commentBack)
+      .post("https://northtechcommunitymalakwahyb.onrender.com/comment", commentBack)
       .then((response) => {
         setContent("");
       })
@@ -50,7 +50,7 @@ function Post(props) {
     if (commentClicked) {
       setOpen("comments");
       axios
-        .get(`https://northtechcommunity3.onrender.com/${user._id}/${props.post._id}`)
+        .get(`https://northtechcommunitymalakwahyb.onrender.com/${user._id}/${props.post._id}`)
         .then((response) => {
           setComments(response.data.message);
           console.log("ress",response)
@@ -78,7 +78,7 @@ function Post(props) {
       setStyle("cont2");
       const likeData = { post: props.post._id, user: user._id };
       axios
-        .post("https://northtechcommunity3.onrender.com/like", likeData)
+        .post("https://northtechcommunitymalakwahyb.onrender.com/like", likeData)
         .then((response) => {
           localStorage.setItem(`liked_${props.post._id}`, "true");
           setLikesNb([...likesNb, response.data.message[0]]);
@@ -86,7 +86,7 @@ function Post(props) {
         .catch((error) => {});
     } else {
       axios
-        .delete(`https://northtechcommunity3.onrender.com/like/${user._id}/${props.post._id}`)
+        .delete(`https://northtechcommunitymalakwahyb.onrender.com/like/${user._id}/${props.post._id}`)
         .then((response) => {
           const deletedLikeId = response.data.message._id;
           const updatedLikeNb = likesNb.filter(
@@ -118,7 +118,7 @@ function Post(props) {
 
   useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/like/${props.post._id}`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/like/${props.post._id}`)
       .then((response) => {
         setLikesNb(response.data.message);
       })
@@ -136,7 +136,7 @@ function Post(props) {
               {props.post.user && (
                 <img
                   className="profile-pic"
-                  src={`https://northtechcommunity3.onrender.com/${props.post.user.media}`}
+                  src={`https://northtechcommunitymalakwahyb.onrender.com/${props.post.user.media}`}
                   alt=""
                 />
               )}
@@ -168,7 +168,7 @@ function Post(props) {
           <p className="status">{post.description}</p>
           <img
             className="img-content"
-            src={`https://northtechcommunity3.onrender.com/${post.media}`}
+            src={`https://northtechcommunitymalakwahyb.onrender.com/${post.media}`}
             alt=""
           />
         </section>
@@ -199,7 +199,7 @@ function Post(props) {
                 <li>
                   <div className="commenterImage">
                     <img
-                      src={`https://northtechcommunity3.onrender.com/${comment.user.media}`}
+                      src={`https://northtechcommunitymalakwahyb.onrender.com/${comment.user.media}`}
                       alt=""
                     />
                   </div>
@@ -217,7 +217,7 @@ function Post(props) {
 
           <div className="commentBox">
             <img
-              src={`https://northtechcommunity3.onrender.com/${user.media}`}
+              src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
               alt=""
               className="user-img"
             />

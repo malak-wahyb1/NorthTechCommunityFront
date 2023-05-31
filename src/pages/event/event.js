@@ -51,7 +51,7 @@ function Event(){
       setIsLoading(true);
   
       axios
-        .get(`https://northtechcommunity3.onrender.com/event?page=${page}&pageSize=20&userId=${user._id}`) // Pass the logged-in user's ID as a query parameter
+        .get(`https://northtechcommunitymalakwahyb.onrender.com/event?page=${page}&pageSize=20&userId=${user._id}`) // Pass the logged-in user's ID as a query parameter
         .then((response) => {
           console.log(response)
           const { docs, hasNextPage } = response.data.message;

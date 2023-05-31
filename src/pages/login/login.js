@@ -33,7 +33,7 @@ const [signUpClass, setSignUpClass] = useState("form-container sign-up-container
   }, [navigate]);
   const loginRequest = () => {
     axios
-      .post(`https://northtechcommunity3.onrender.com/user/login`, { email, password })
+      .post(`https://northtechcommunitymalakwahyb.onrender.com/user/login`, { email, password })
       .then((response) => {
         navigate(home);
         localStorage.setItem("token", response.data.token);
@@ -68,7 +68,7 @@ setSignUpClass("showing")
     e.preventDefault();
     console.log(signUp);
     axios
-      .post(`https://northtechcommunity3.onrender.com/user`, signUp)
+      .post(`https://northtechcommunitymalakwahyb.onrender.com/user`, signUp)
       .then((response) => {
         console.log(response);
         if (response.data.token) {

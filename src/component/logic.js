@@ -7,8 +7,8 @@ export const getSender = (loggedUser, users) => {
 };
 export const getImage = (loggedUser, users) => {
   return users[0]._id === loggedUser._id
-    ? `https://northtechcommunity3.onrender.com/${users[1].media}`
-    : `https://northtechcommunity3.onrender.com/${users[0].media}`;
+    ? `https://northtechcommunitymalakwahyb.onrender.com/${users[1].media}`
+    : `https://northtechcommunitymalakwahyb.onrender.com/${users[0].media}`;
 };
 export const Friendacc = (loggedUser, users) => {
   return users[0]._id === loggedUser._id
@@ -39,7 +39,7 @@ export const isLastMessage = (messages, i, userId) => {
 };
 
 export const isFriend=(user,friend)=>{
-  axios.get(`https://northtechcommunity3.onrender.com/friend/${user._id}`).then((response)=>{
+  axios.get(`https://northtechcommunitymalakwahyb.onrender.com/friend/${user._id}`).then((response)=>{
     console.log(response)
   }).catch((error)=>{console.log(error)});
 }

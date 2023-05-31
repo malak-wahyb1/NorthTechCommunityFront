@@ -45,7 +45,7 @@ function Header() {
             <div className="user-settings">
               <img
                 className="user-img"
-                src={`https://northtechcommunity3.onrender.com/${users.media}`}
+                src={`https://northtechcommunitymalakwahyb.onrender.com/${users.media}`}
                 alt=""
               />
               <div className="user-name">{users.first_name}</div>

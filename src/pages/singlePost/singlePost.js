@@ -19,20 +19,20 @@ function SinglePost(props) {
 
   useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/post/${postId}`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/post/${postId}`)
       .then((response) => {
         setUser(response.data.message.user);
         setPost(response.data.message);
       })
       .catch((error) => {});
     axios
-      .get(`https://northtechcommunity3.onrender.com/like/${postId}`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/like/${postId}`)
       .then((response) => {
         setLikesNb(response.data.message);
       })
       .catch((error) => {});
       axios
-      .get(`https://northtechcommunity3.onrender.com/comment/${postId}`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/comment/${postId}`)
       .then((response) => {
      
         setComments(response.data.message);
@@ -51,7 +51,7 @@ function SinglePost(props) {
       post: postId,
     };
     axios
-      .post("https://northtechcommunity3.onrender.com/comment", commentBack)
+      .post("https://northtechcommunitymalakwahyb.onrender.com/comment", commentBack)
       .then((response) => {
         console.log(response);
         setComments([...comments,response.data.message])
@@ -80,7 +80,7 @@ function SinglePost(props) {
 
       const likeData = { post: postId, user: currentUser._id };
       axios
-        .post("https://northtechcommunity3.onrender.com/like", likeData)
+        .post("https://northtechcommunitymalakwahyb.onrender.com/like", likeData)
         .then((response) => {
           console.log(response);
           localStorage.setItem(`liked_${postId}`, "true");
@@ -90,7 +90,7 @@ function SinglePost(props) {
         });
     } else {
       axios
-        .delete(`https://northtechcommunity3.onrender.com/like/${currentUser._id}/${postId}`)
+        .delete(`https://northtechcommunitymalakwahyb.onrender.com/like/${currentUser._id}/${postId}`)
         .then((response) => {
           console.log(response);
         })
@@ -125,7 +125,7 @@ function SinglePost(props) {
             <a>
               <img
                 className="profile-pic"
-                src={`https://northtechcommunity3.onrender.com/${user.media}`}
+                src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
                 alt=""
               />
             </a>
@@ -141,7 +141,7 @@ function SinglePost(props) {
           <p className="status">{post.description}</p>
           <img
             className="img-content"
-            src={`https://northtechcommunity3.onrender.com/${post.media}`}
+            src={`https://northtechcommunitymalakwahyb.onrender.com/${post.media}`}
             alt=""
           />
 
@@ -169,7 +169,7 @@ function SinglePost(props) {
                     <li>
                       <div class="commenterImage">
                         <img
-                          src={`https://northtechcommunity3.onrender.com/${comment.user.media}`}
+                          src={`https://northtechcommunitymalakwahyb.onrender.com/${comment.user.media}`}
                           alt=""
                         />
                       </div>
@@ -187,7 +187,7 @@ function SinglePost(props) {
 
             <div className="commentBox">
               <img
-                src={`https://northtechcommunity3.onrender.com/${user.media}`}
+                src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
                 alt=""
                 className="user-img"
               />

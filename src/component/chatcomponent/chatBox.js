@@ -5,7 +5,7 @@ import ScrollableFeed from "react-scrollable-feed";
 import React from "react";
 import io from "socket.io-client";
 import { Chat, ChatBubble } from "@mui/icons-material";
-const ENDPOINT = "https://northtechcommunity3.onrender.com";
+const ENDPOINT = "https://northtechcommunitymalakwahyb.onrender.com";
 var socket, selectedChatCompare;
 function ChatBox() {
   const selectedChat = useSelector((state) => state.selectedChat);
@@ -36,7 +36,7 @@ function ChatBox() {
 
     axios
       .get(
-        `https://northtechcommunity3.onrender.com/message/${selectedChat._id}`
+        `https://northtechcommunitymalakwahyb.onrender.com/message/${selectedChat._id}`
       )
       .then((response) => {
         console.log(response);
@@ -51,7 +51,7 @@ function ChatBox() {
   const handleSendMessage = () => {
    
     axios
-      .post(`https://northtechcommunity3.onrender.com/message`, {
+      .post(`https://northtechcommunitymalakwahyb.onrender.com/message`, {
         sender: user._id,
         content: message,
         chatId: selectedChat._id,
@@ -90,7 +90,7 @@ function ChatBox() {
                     <div className="message-wrapper">
                       <img
                         className="message-pp"
-                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        src={`https://northtechcommunitymalakwahyb.onrender.com/${m.sender.media}`}
                         alt="profile-pic"
                       />
                       <div className="message-box-wrapper">
@@ -102,7 +102,7 @@ function ChatBox() {
                   <div className="message-wrapper reverse">
                     <img
                       className="message-pp"
-                      src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                      src={`https://northtechcommunitymalakwahyb.onrender.com/${m.sender.media}`}
                       alt="profile-pic"
                     />
                     <div className="message-box-wrapper">
@@ -113,7 +113,7 @@ function ChatBox() {
                  {(m.sender._id ===user._id)?( <div className="message-wrapper reverse">
                       <img
                         className="message-pp"
-                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        src={`https://northtechcommunitymalakwahyb.onrender.com/${m.sender.media}`}
                         alt="profile-pic"
                       />
                       <div className="message-box-wrapper">
@@ -123,7 +123,7 @@ function ChatBox() {
                     </div>):(<div className="message-wrapper">
                       <img
                         className="message-pp"
-                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        src={`https://northtechcommunitymalakwahyb.onrender.com/${m.sender.media}`}
                         alt="profile-pic"
                       />
                       <div className="message-box-wrapper">

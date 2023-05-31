@@ -22,7 +22,7 @@ function DeleteComponent(props) {
     setOpen(false);
 
     axios
-      .delete(`https://northtechcommunity3.onrender.com/${props.url}/${props.Id}`)
+      .delete(`https://northtechcommunitymalakwahyb.onrender.com/${props.url}/${props.Id}`)
       .then((response) => {
         toast.success(`${props.url} deleted successfully`, {
             style: {

@@ -63,7 +63,7 @@ const EventShare = () => {
     form.append("posted", users._id);
 console.log(selectedSpeakers);
     axios
-      .post("https://northtechcommunity3.onrender.com/event", form)
+      .post("https://northtechcommunitymalakwahyb.onrender.com/event", form)
       .then((response) => {
         toast.success("Post added successfully", {
           style: {
@@ -88,7 +88,7 @@ console.log(selectedSpeakers);
 
   return (
     <div className="PostShare">
-      <img src={`https://northtechcommunity3.onrender.com/${users.media}`} alt="" />
+      <img src={`https://northtechcommunitymalakwahyb.onrender.com/${users.media}`} alt="" />
       <div>
         <form onSubmit={handleSubmitPost}>
           <div className="NewEvent">

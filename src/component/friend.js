@@ -38,7 +38,7 @@ function SimpleDialog(props) {
     onClose(value);
     console.log(user._id, value);
     axios
-      .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: value })
+      .post("https://northtechcommunitymalakwahyb.onrender.com/chat", { user1: user._id, user2: value })
       .then((response) => {
         console.log(response.data.user);
         const users = response.data.user;
@@ -51,7 +51,7 @@ function SimpleDialog(props) {
 
   React.useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/user`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/user`)
       .then((response) => {
         console.log(response);
         setFriend1(response.data.message);
@@ -92,7 +92,7 @@ function SimpleDialog(props) {
                 <ListItemAvatar>
                   <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                     <PersonIcon />
-                    <img src={`https://northtechcommunity3.onrender.com/${email.media}`} alt="" />
+                    <img src={`https://northtechcommunitymalakwahyb.onrender.com/${email.media}`} alt="" />
                   </Avatar>
                 </ListItemAvatar>
                 {email.first_name}

@@ -33,7 +33,7 @@ function LoggedUser() {
   };
   useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/friend/${userId}`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/friend/${userId}`)
       .then((response) => {
        
       })
@@ -67,7 +67,7 @@ function LoggedUser() {
     setIsLoading(true);
 
     axios
-      .get(`https://northtechcommunity3.onrender.com/post/user/${userId}?page=${page}&pageSize=20`) // Adjust pageSize as per your requirement
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/post/user/${userId}?page=${page}&pageSize=20`) // Adjust pageSize as per your requirement
       .then((response) => {
         const { docs, hasNextPage } = response.data.message;
         setPosts((prevPosts) => [...prevPosts, ...docs]);
@@ -101,7 +101,7 @@ function LoggedUser() {
 
             <img
               class="user-header"
-              src={`https://northtechcommunity3.onrender.com/${user.media}`}
+              src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
               alt=""
             />
           </div>

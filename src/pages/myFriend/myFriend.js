@@ -8,7 +8,7 @@ function Friend(){
   const user = useSelector((state) => state.user);
 
 //   useEffect(()=>{
-// axios.get(`https://northtechcommunity3.onrender.com/user/${user._id}`).then((response)=>{
+// axios.get(`https://northtechcommunitymalakwahyb.onrender.com/user/${user._id}`).then((response)=>{
 //   console.log(response)
 // }).catch((err)=>{
 //   console.error(err);
