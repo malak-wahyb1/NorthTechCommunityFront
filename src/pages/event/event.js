@@ -51,23 +51,26 @@ function Event(){
       setIsLoading(true);
   
       axios
-        .get(`https://northtechcommunitymalakwahyb.onrender.com/event?page=${page}&pageSize=20&userId=${user._id}`) // Pass the logged-in user's ID as a query parameter
+        .get(`https://northtechcommunitymalakwahyb.onrender.com/event`) // Pass the logged-in user's ID as a query parameter
         .then((response) => {
-          console.log(response)
-          const { docs, hasNextPage } = response.data.message;
-          setPosts((prevPosts) => [...prevPosts, ...docs]);
-          setHasMore(hasNextPage);
-          setIsLoading(false);
+     
+        setPosts(response.data.message)
         })
         .catch((error) => {
   
           setIsLoading(false);
         });
     };
+
+      const handleResponseData = (message) => {
+        setPosts((prevPosts) => [...prevPosts, message]);
+      };
+      
+    
   
 return(
     <section className="event">
-      {!isAdmin?( <EventShare/>):null}
+      {!isAdmin?( <EventShare handleResponse={handleResponseData}/>):null}
        
         {posts.map((post) =>(
  <EventComponent key={post.id} event={post}/>

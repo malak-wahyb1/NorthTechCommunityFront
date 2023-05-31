@@ -7,9 +7,8 @@ import axios from "axios";
 import ResponsiveDatePickers from "./datePicker";
 import ResponsiveTimePickers from "./timePicker";
 import CountrySelect from "./location";
-import Speaker from "./speaker";
 import SendIcon from '@mui/icons-material/Send';
-const EventShare = () => {
+const EventShare = (props) => {
   const users = useSelector((state) => state.user);
   const [content, setContent] = useState("");
   const [link, setLink] = useState("");
@@ -20,7 +19,7 @@ const EventShare = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedSpeakers, setSelectedSpeakers] = useState([]);
-
+const{handleResponse}=props
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
@@ -43,9 +42,7 @@ const EventShare = () => {
     setSelectedCity(city);
   };
 
-  const handleChangeSpeaker = (speakers) => {
-    setSelectedSpeakers(speakers.filter((speaker) => speaker !== null));
-  };
+
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
@@ -56,16 +53,15 @@ const EventShare = () => {
     form.append("address", selectedCity);
     form.append("date", selectedDate);
     form.append("time", selectedTime);
-    selectedSpeakers.forEach((speaker) => {
-      form.append("speaker", speaker);
-    });
     form.append("media", media);
     form.append("posted", users._id);
 console.log(selectedSpeakers);
     axios
       .post("https://northtechcommunitymalakwahyb.onrender.com/event", form)
       .then((response) => {
-        toast.success("Post added successfully", {
+        console.log(response)
+        handleResponse(response.data.message)
+        toast.success("Event added successfully", {
           style: {
             borderRadius: "10px",
             background: "#333",
@@ -74,12 +70,12 @@ console.log(selectedSpeakers);
         });
         setContent("");
         setLink("");
-        setSelectedDate(null);
-        setSelectedTime(null);
-        setSelectedCity(null);
+        setSelectedDate("");
+        setSelectedTime("");
+        setSelectedCity("");
         setSelectedSpeakers([]);
-        setMedia(null);
-        setImage(null);
+        setMedia("");
+        setImage("");
       })
       .catch((error) => {
         console.log(error);
@@ -103,7 +99,7 @@ console.log(selectedSpeakers);
             />
 
             <CountrySelect onCityChange={handleCityChange} />
-            <Speaker onSpeakerChange={handleChangeSpeaker} />
+       
             <input
               type="link"
               value={link}

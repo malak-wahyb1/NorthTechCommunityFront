@@ -69,13 +69,11 @@ function Home() {
       .get(`https://northtechcommunitymalakwahyb.onrender.com/post`) // Pass the logged-in user's ID as a query parameter
       .then((response) => {
 console.log(response);
-        const { docs, hasNextPage } = response.data.message;
-        setPosts(docs);
-        setHasMore(hasNextPage);
+       setPosts(response.data.message);
         setIsLoading(false);
       })
       .catch((error) => {
-
+console.log(error);
         setIsLoading(false);
       });
   };

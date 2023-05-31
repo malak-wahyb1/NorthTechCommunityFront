@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import DeleteComponent from "../editpost";
 
 const EventComponent = (props) => {
-  console.log(props)
+
  if(props.event){
   return (
     <div className="blog-slider">
@@ -25,7 +25,7 @@ const EventComponent = (props) => {
           <div className="blog-slider__content">
             <div className="blog-slider__title">
               <img
-                src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
+                src={`https://northtechcommunitymalakwahyb.onrender.com/${props.event.posted.media}`}
                 alt=""
               />{" "}
               <span>{props.event.posted.first_name} {props.event.posted.last_name}</span>
@@ -51,51 +51,7 @@ const EventComponent = (props) => {
             </span>):null}
            
 
-            <Link href="#" className="blog-slider__button">
-              <StarBorderIcon />
-              interested
-            </Link>
-            <div className="speaker_wrapp">
-              {" "}
-              Speakers:
-              <div className="speaker">
-                <Link>
-                  <img
-                    src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
-                    alt=""
-                  />
-                 
-                </Link>
-                <Link>
-                  <img
-                    src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
-                    alt=""
-                  />
-                 
-                </Link>
-                <Link>
-                  <img
-                    src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
-                    alt=""
-                  />
-                 
-                </Link>
-                <Link>
-                  <img
-                    src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
-                    alt=""
-                  />
-                 
-                </Link>
-                <Link>
-                  <img
-                    src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp"
-                    alt=""
-                  />
-                 
-                </Link>
-              </div>
-            </div>
+         
           </div>
         </div>
       </div>
