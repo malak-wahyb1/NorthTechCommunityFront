@@ -20,34 +20,27 @@ import VisitorRoute from "./route/visitor";
 function App() {
   return (
     <>
-  <Toaster
-  position="bottom-right"
-  reverseOrder={false}
-/>
+      <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
-
         <Route path="/user" element={<VisitorRoute />}>
-          <Route path="/user/home" element={<Home />}/>
-          <Route path="/user/friend" element={<Friend/>}/>
-          <Route path="/user/event" element={<Event/>}/>
-          <Route path="/user/workspace" element={<Workspace/>}/>
+          <Route path="/user/home" element={<Home />} />
+          <Route path="/user/friend" element={<Friend />} />
+          <Route path="/user/event" element={<Event />} />
+          <Route path="/user/workspace" element={<Workspace />} />
 
-          <Route path="/user/post/:postId" element={<SinglePost/>}/>
-          <Route path="/user/profile/:userId" element={<UserProfile/>}/>
-          <Route path="/user/:userId" element={<LoggedUser/>}/>
+          <Route path="/user/post/:postId" element={<SinglePost />} />
+          <Route path="/user/profile/:userId" element={<UserProfile />} />
+          <Route path="/user/:userId" element={<LoggedUser />} />
 
-          <Route path="/user/admin/adminacc" element={<AdminAcc/>}/>
-          <Route path="/user/admin/users" element={<Users/>}/>
-
-
+          <Route path="/user/admin/adminacc" element={<AdminAcc />} />
+          <Route path="/user/admin/users" element={<Users />} />
         </Route>
         <Route path="/admin" element={<AdminRoute />}>
-          <Route path="/admin" element={<Login/>}/>
-        
+          <Route path="/admin" element={<Login />} />
         </Route>
         <Route path="/" element={<LoginPage />} />
-          <Route path="/user/chat" element={<Chat/>}/>
-          <Route path='/*' element={<NotFound/>}/>
+        <Route path="/user/chat" element={<Chat />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   );

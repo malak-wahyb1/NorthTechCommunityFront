@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ScrollableFeed from "react-scrollable-feed";
-import { isLastMessage, isSameSender } from "../logic";
 import React from "react";
 import io from "socket.io-client";
+import { Chat, ChatBubble } from "@mui/icons-material";
 const ENDPOINT = "https://northtechcommunity3.onrender.com";
 var socket, selectedChatCompare;
 function ChatBox() {
@@ -18,18 +18,16 @@ function ChatBox() {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
-  }, []);
+  }, [user]);
   useEffect(() => {
     fetchChat();
-    selectedChatCompare=selectedChat
+    selectedChatCompare = selectedChat;
   }, [selectedChat]);
-  useEffect(()=>{
-    socket.on("message recieved",(newMessageRecived)=>{
-    
-        setChats([...chats,newMessageRecived])
-      
-    })
-  })
+  useEffect(() => {
+    socket.on("message recieved", (newMessageRecived) => {
+      setChats([...chats, newMessageRecived]);
+    });
+  });
 
   const fetchChat = () => {
     if (!selectedChat) {
@@ -37,10 +35,13 @@ function ChatBox() {
     }
 
     axios
-      .get(`https://northtechcommunity3.onrender.com/message/${selectedChat._id}`)
+      .get(
+        `https://northtechcommunity3.onrender.com/message/${selectedChat._id}`
+      )
       .then((response) => {
+        console.log(response);
         setChats(response.data.message);
-        socket.emit('join chat',selectedChat)
+        socket.emit("join chat", selectedChat);
       })
       .catch((error) => {
         console.log(error);
@@ -48,6 +49,7 @@ function ChatBox() {
   };
 
   const handleSendMessage = () => {
+   
     axios
       .post(`https://northtechcommunity3.onrender.com/message`, {
         sender: user._id,
@@ -55,7 +57,12 @@ function ChatBox() {
         chatId: selectedChat._id,
       })
       .then((response) => {
-        socket.emit("new message",response.data.message[0],response.data.message[0].chat.user)
+        console.log(user._id)
+        socket.emit(
+          "new message",
+          response.data.message[0],
+          response.data.message[0].chat.user
+        );
         setChats([...chats, response.data.message[0]]);
         setMessage("");
       })
@@ -67,6 +74,7 @@ function ChatBox() {
   return (
     <>
       <div className="chat-wrapper">
+       
         {!selectedChat && (
           <h1 className="start-chat-message">
             Click On The User To Start Chatting
@@ -77,8 +85,7 @@ function ChatBox() {
             {chats &&
               chats.map((m, i) => (
                 <React.Fragment key={i}>
-                 
-                  {(isSameSender(chats, m, i, user._id) ||
+                  {/* {(isSameSender(chats, m, i, user._id) ||
                     isLastMessage(chats, i, user._id)) && (
                     <div className="message-wrapper">
                       <img
@@ -102,30 +109,35 @@ function ChatBox() {
                       <div className="message-box">{m.content}</div>
                       <span>9h ago</span>
                     </div>
-                  </div>
+                  </div> */}
+                 {(m.sender._id ===user._id)?( <div className="message-wrapper reverse">
+                      <img
+                        className="message-pp"
+                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        alt="profile-pic"
+                      />
+                      <div className="message-box-wrapper">
+                        <div className="message-box">{m.content}</div>
+                        <span>{m.created_at}</span>
+                      </div>
+                    </div>):(<div className="message-wrapper">
+                      <img
+                        className="message-pp"
+                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        alt="profile-pic"
+                      />
+                      <div className="message-box-wrapper">
+                        <div className="message-box">{m.content}</div>
+                        <span>{m.created_at}</span>
+                      </div>
+                    </div>)}
                 </React.Fragment>
               ))}
           </ScrollableFeed>
         )}
       </div>
       <div className="chat-input-wrapper">
-        <button className="chat-attachment-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="feather feather-paperclip"
-            viewBox="0 0 24 24"
-          >
-            <defs />
-            <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
-          </svg>
-        </button>
+      
         <div className="input-wrapper">
           <input
             type="text"
@@ -134,24 +146,7 @@ function ChatBox() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <button className="emoji-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="feather feather-smile"
-              viewBox="0 0 24 24"
-            >
-              <defs />
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
-            </svg>
-          </button>
+          
         </div>
         <button className="chat-send-btn" onClick={handleSendMessage}>
           Send

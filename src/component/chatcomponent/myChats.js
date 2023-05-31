@@ -1,4 +1,4 @@
-import { ChatBubbleOutline } from "@mui/icons-material";
+import { ChatBubbleOutline, Close } from "@mui/icons-material";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -16,7 +16,9 @@ function MyChats() {
   const dispatch = useDispatch();
   const newchat = useSelector((state) => state.newChat);
   const [chat, setChat] = useState([]);
-
+  const[ close,setClose]=useState("close")
+  const [open ,setOPen]=useState("chat-res")
+const [appLeftClass,setAppLeftClass]=useState("app-left")
   const [selectedChat, setSelectedChat] = useState(null);
   dispatch(storeChat(user));
 
@@ -37,10 +39,25 @@ function MyChats() {
     setSelectedChat(chat);
     dispatch(storeSelectedChat(chat));
   };
-
+  const responsive=()=>{
+setAppLeftClass("showing")
+setOPen("close")
+setClose("chat-res")
+  }
+const responsiveClose=()=>{
+  setOPen("chat-res")
+  setClose("close")
+  setAppLeftClass("app-left")
+}
   return (
     <>
-      <div className="app-left">
+     <div className={open}>
+        <ChatBubbleOutline onClick={responsive}/>
+        </div>
+        <div className={close}>
+          <Close onClick={responsiveClose}/>
+        </div>
+      <div className={appLeftClass}>
         <div className="app-left-header">
           <div className="app-logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

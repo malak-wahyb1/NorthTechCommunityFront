@@ -66,9 +66,9 @@ function Home() {
     setIsLoading(true);
 
     axios
-      .get(`https://northtechcommunity3.onrender.com/post?page=${page}&pageSize=20&userId=${user._id}`) // Pass the logged-in user's ID as a query parameter
+      .get(`https://northtechcommunity3.onrender.com/post`) // Pass the logged-in user's ID as a query parameter
       .then((response) => {
-
+console.log(response);
         const { docs, hasNextPage } = response.data.message;
         setPosts(docs);
         setHasMore(hasNextPage);
@@ -86,7 +86,7 @@ function Home() {
 
  {posts.map((post) => {
   
-
+if(post.user._id ===user._id)return<></>;
   return <Post key={post._id} post={post} />;
 })}
 

@@ -11,7 +11,7 @@ import DeleteComponent from "../editpost";
 
 const EventComponent = (props) => {
   console.log(props)
- 
+ if(props.event){
   return (
     <div className="blog-slider">
       <div className="blog-slider__wrp swiper-wrapper">
@@ -101,5 +101,5 @@ const EventComponent = (props) => {
       </div>
     </div>
   );
-};
+};}
 export default EventComponent;

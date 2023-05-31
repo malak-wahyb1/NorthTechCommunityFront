@@ -16,7 +16,7 @@ import { useState } from "react";
 import { blue } from "@mui/material/colors";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Friendacc, getImage, getId, newChat } from "./logic";
+import {  newChat } from "./logic";
 import { Input } from "@mui/base";
 const emails = ["username@gmail.com", "user02@gmail.com"];
 
@@ -38,7 +38,7 @@ function SimpleDialog(props) {
     onClose(value);
     console.log(user._id, value);
     axios
-      .post("http://localhost:5000/chat", { user1: user._id, user2: value })
+      .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: value })
       .then((response) => {
         console.log(response.data.user);
         const users = response.data.user;
@@ -51,22 +51,18 @@ function SimpleDialog(props) {
 
   React.useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/friend/${user._id}`)
+      .get(`https://northtechcommunity3.onrender.com/user`)
       .then((response) => {
-        console.log(response.data.message.docs);
-        setFriend1(response.data.message.docs);
+        console.log(response);
+        setFriend1(response.data.message);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [user._id]);
 
-if(friend1){
-    const filteredFriends = friend1.filter((first_name) =>
-    Friendacc(user, first_name.friend)
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase())
-  );
+
+
 
   const handleSearchInputChange = (e) => {
     const value = e.target.value;
@@ -87,19 +83,19 @@ if(friend1){
         />
 
         {isSearching ? (
-          filteredFriends.map((email) => (
+          friend1.map((email) => (
             <ListItem disableGutters>
               <ListItemButton
-                onClick={() => handleListItemClick(getId(user, email.friend))}
+                onClick={() => handleListItemClick(email)}
                 key={email}
               >
                 <ListItemAvatar>
                   <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                     <PersonIcon />
-                    <img src={getImage(user, email.friend)} alt="" />
+                    <img src={`https://northtechcommunity3.onrender.com/${email.media}`} alt="" />
                   </Avatar>
                 </ListItemAvatar>
-                {Friendacc(user, email.friend)}
+                {email.first_name}
               </ListItemButton>
             </ListItem>
           ))
@@ -114,7 +110,7 @@ if(friend1){
       </List>
     </Dialog>
   );
-}}
+}
 
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
