@@ -16,7 +16,6 @@ function UserProfile() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-
   const [friend, setFriend] = useState([]);
   const handleScroll = () => {
     if (
@@ -28,7 +27,7 @@ function UserProfile() {
   };
   useEffect(() => {
     axios
-      .get(`https://northtechcommunitymalakwahyb.onrender.com/friend/All/${userId}`)
+      .get(`https://northtechcommunity3.onrender.com/friend/All/${userId}`)
       .then((response) => {
         console.log(response);
         setFriend(response.data.message);
@@ -70,11 +69,10 @@ function UserProfile() {
     setIsLoading(true);
 
     axios
-      .get(`https://northtechcommunitymalakwahyb.onrender.com/post/user/${userId}?page=${page}&pageSize=20`) // Adjust pageSize as per your requirement
+      .get(`https://northtechcommunity3.onrender.com/post/user/${userId}`) // Adjust pageSize as per your requirement
       .then((response) => {
-        const { docs, hasNextPage } = response.data.message;
-        setPosts((prevPosts) => [...prevPosts, ...docs]);
-        setHasMore(hasNextPage);
+        setPosts(response.data.message);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -84,7 +82,7 @@ function UserProfile() {
   };
   useEffect(() => {
     axios
-      .get(`https://northtechcommunitymalakwahyb.onrender.com/user/${userId}`)
+      .get(`https://northtechcommunity3.onrender.com/user/${userId}`)
       .then((response) => {
         setUser(response.data.message);
       })
@@ -93,22 +91,23 @@ function UserProfile() {
       });
   }, [userId]);
   const handleFriendRequest = () => {
-    console.log(userId)
-    console.log(users._id)
+    console.log(userId);
+    console.log(users._id);
 
-      axios
-        .put(`https://northtechcommunitymalakwahyb.onrender.com/user/follow/${userId}/${users._id}`, {
+    axios
+      .put(
+        `https://northtechcommunity3.onrender.com/user/follow/${userId}/${users._id}`,
+        {
           followId: userId,
           senderId: users._id,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    
-    
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -119,7 +118,7 @@ function UserProfile() {
             <div class="user-header-overlay"></div>
             <img
               class="user-header"
-              src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
+              src={`https://northtechcommunity3.onrender.com/${user.media}`}
               alt=""
             />
           </div>
@@ -138,19 +137,17 @@ function UserProfile() {
           </div>
           <div class="ufo-bar-col4">
             <div class="ufo-bar-col4-inner">
-              
-                <p>
-                  <div class="ufo-bar-col4-inner">
-                    <button
-                      class="button2 btn-primary2"
-                      onClick={handleFriendRequest}
-                    >
-                      <i class="uil uil-plus"></i>Follow
-                      <div class="btn-secondary2"></div>
-                    </button>
-                  </div>
-                </p>
-           
+              <p>
+                <div class="ufo-bar-col4-inner">
+                  <button
+                    class="button2 btn-primary2"
+                    onClick={handleFriendRequest}
+                  >
+                    <i class="uil uil-plus"></i>Follow
+                    <div class="btn-secondary2"></div>
+                  </button>
+                </div>
+              </p>
             </div>
           </div>
         </div>

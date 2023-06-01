@@ -12,8 +12,12 @@ function LoginPage() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-const [loginClass, setLoginClass] = useState("form-container sign-in-container")
-const [signUpClass, setSignUpClass] = useState("form-container sign-up-container")
+  const [loginClass, setLoginClass] = useState(
+    "form-container sign-in-container"
+  );
+  const [signUpClass, setSignUpClass] = useState(
+    "form-container sign-up-container"
+  );
   const [signUp, setSignUp] = useState([]);
   const location = useLocation();
   const { from: { pathname: home } = { pathname: "/user/home" } } =
@@ -33,7 +37,10 @@ const [signUpClass, setSignUpClass] = useState("form-container sign-up-container
   }, [navigate]);
   const loginRequest = () => {
     axios
-      .post(`https://northtechcommunitymalakwahyb.onrender.com/user/login`, { email, password })
+      .post(`https://northtechcommunity3.onrender.com/user/login`, {
+        email,
+        password,
+      })
       .then((response) => {
         navigate(home);
         localStorage.setItem("token", response.data.token);
@@ -43,9 +50,7 @@ const [signUpClass, setSignUpClass] = useState("form-container sign-up-container
         dispatch(storeToken(response.data.token));
       })
       .catch((error) => {
-       
-      
-        toast.error("try again", {
+        toast.error("username or password is incorrect", {
           style: {
             borderRadius: "10px",
             background: "#333",
@@ -54,10 +59,10 @@ const [signUpClass, setSignUpClass] = useState("form-container sign-up-container
         });
       });
   };
-  const handlelink=()=>{
-setLoginClass("hidden")
-setSignUpClass("showing")
-  }
+  const handlelink = () => {
+    setLoginClass("hidden");
+    setSignUpClass("showing");
+  };
   const handleChange = (e) => {
     setSignUp((prevSignUp) => ({
       ...prevSignUp,
@@ -66,9 +71,9 @@ setSignUpClass("showing")
   };
   const handleSignUp = (e) => {
     e.preventDefault();
-    console.log(signUp);
+
     axios
-      .post(`https://northtechcommunitymalakwahyb.onrender.com/user`, signUp)
+      .post(`https://northtechcommunity3.onrender.com/user`, signUp)
       .then((response) => {
         console.log(response);
         if (response.data.token) {
@@ -184,8 +189,10 @@ setSignUpClass("showing")
                 setPassword(e.target.value);
               }}
             />
-            <Link className="signUpLink" onClick={handlelink}>You don't have account,Sign up now!</Link>
-      
+            <Link className="signUpLink" onClick={handlelink}>
+              You don't have account,Sign up now!
+            </Link>
+
             <button type="submit">Sign In</button>
           </form>
         </div>

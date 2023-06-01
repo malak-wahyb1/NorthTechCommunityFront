@@ -8,7 +8,7 @@ export function AdminAcc() {
   const [admin, setAdmin] = useState([]);
   useEffect(() => {
     axios
-      .get("https://northtechcommunitymalakwahyb.onrender.com/admin")
+      .get("https://northtechcommunity3.onrender.com/admin")
       .then((response) => {
         setAdmin(response.data.message.map((row) => ({ ...row, id: row._id })));
       })

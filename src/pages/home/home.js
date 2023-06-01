@@ -7,93 +7,47 @@ import Post from "../../component/post/post";
 import "./home.css";
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const user = useSelector((state) => state.user); // Assuming you have access to the logged-in user's ID through Redux
+  const [isLoading, setIsLoading] = useState(true);
+
+  const user = useSelector((state) => state.user);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    if (!user) return; // Skip if user is undefined
-  
+    if (!user) return;
+
     const role = parseInt(user.role);
     if (role === 0 || role === 1) {
       setIsAdmin(true);
     }
   }, [user]);
-  
-
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 200
-    ) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
 
   useEffect(() => {
-    if (!user) return; // Skip if user is undefined
   
-    fetchPosts();
-  
-    // Clean up scroll event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [user]);
-  useEffect(() => {
-    fetchPosts();
-
-    // Clean up scroll event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [user._id]); // Add user._id as a dependency to refetch posts when the user changes
-
-  useEffect(() => {
-    if (!hasMore) return; // Stop fetching if there are no more pages
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasMore]);
-
-  const fetchPosts = () => {
-    if (isLoading) return; // Prevent fetching if already loading
-
-    setIsLoading(true);
 
     axios
-      .get(`https://northtechcommunitymalakwahyb.onrender.com/post`) // Pass the logged-in user's ID as a query parameter
+      .get(`https://northtechcommunity3.onrender.com/post`)
       .then((response) => {
-console.log(response);
-       setPosts(response.data.message);
+        console.log(response);
+        setPosts(response.data.message);
         setIsLoading(false);
       })
       .catch((error) => {
-console.log(error);
+        console.log(error);
         setIsLoading(false);
       });
-  };
+  }, [user._id]); // Add user._id as a dependency to refetch posts when the user changes
 
   return (
     <>
-  {isAdmin?null: <PostShare />}
+      {isAdmin ? null : <PostShare />}
 
- {posts.map((post) => {
-  
-if(post.user._id ===user._id)return<></>;
-  return <Post key={post._id} post={post} />;
-})}
+      {posts.map((post) => {
+        if (post.user._id === user._id) return <></>;
+        return <Post key={post._id} post={post} />;
+      })}
 
-  
-  {isLoading && <Loading />}
-</>
-
+      {isLoading && <Loading />}
+    </>
   );
-  
 }
 
 export default Home;

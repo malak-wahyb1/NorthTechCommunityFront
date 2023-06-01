@@ -27,7 +27,7 @@ export function Login(){
     };
     const loginRequest = () => {
       axios
-        .post(`https://northtechcommunitymalakwahyb.onrender.com/admin/login`, { username, password })
+        .post(`https://northtechcommunity3.onrender.com/admin/login`, { username, password })
         .then((response) => {
          
   navigate(home)

@@ -6,7 +6,7 @@ import axios from "axios";
 
 const WorkspaceComponent = () => {
   useEffect(() => {
-    axios.get("https://northtechcommunitymalakwahyb.onrender.com/workspace").then((response) => {
+    axios.get("https://northtechcommunity3.onrender.com/workspace").then((response) => {
       console.log(response);
     }).catch((error)=>{
       console.log(error);

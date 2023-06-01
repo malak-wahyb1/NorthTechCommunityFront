@@ -20,69 +20,42 @@ function LoggedUser() {
   const [hasMore, setHasMore] = useState(true);
 
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 200
-    ) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+ 
   const handleFormResponse = (message) => {
     setUser(message);
   };
-  useEffect(() => {
-    axios
-      .get(`https://northtechcommunitymalakwahyb.onrender.com/friend/${userId}`)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [userId]);
+  
 
   useEffect(() => {
-    fetchPosts();
+    
+      if (isLoading) return; // Prevent fetching if already loading
+  
+      setIsLoading(true);
+  
+      axios
+        .get(`https://northtechcommunity3.onrender.com/post/user/${userId}`) // Adjust pageSize as per your requirement
+        .then((response) => {
+          
+          setPosts(response.data.message);
+      
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsLoading(false);
+        });
+    
 
-    // Clean up scroll event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+ 
   }, []);
 
-  useEffect(() => {
-    if (!hasMore) return; // Stop fetching if there are no more pages
+ 
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasMore]);
-
-  const fetchPosts = () => {
-    if (isLoading) return; // Prevent fetching if already loading
-
-    setIsLoading(true);
-
-    axios
-      .get(`https://northtechcommunitymalakwahyb.onrender.com/post/user/${userId}?page=${page}&pageSize=20`) // Adjust pageSize as per your requirement
-      .then((response) => {
-        const { docs, hasNextPage } = response.data.message;
-        setPosts((prevPosts) => [...prevPosts, ...docs]);
-        setHasMore(hasNextPage);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
-  };
+  
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/${userId}`)
+      .get(`https://northtechcommunitymalakwahyb.onrender.com/user/${userId}`)
       .then((response) => {
         setUser(response.data.message);
       })
@@ -101,7 +74,7 @@ function LoggedUser() {
 
             <img
               class="user-header"
-              src={`https://northtechcommunitymalakwahyb.onrender.com/${user.media}`}
+              src={`https://northtechcommunity3.onrender.com/${user.media}`}
               alt=""
             />
           </div>

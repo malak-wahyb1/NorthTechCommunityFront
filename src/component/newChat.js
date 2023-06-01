@@ -21,7 +21,7 @@ export default function NewChat({ onSpeakerChange }) {
       const speakerId = speaker ? speaker._id : null;
       console.log(speakerId);
       axios
-        .post("https://northtechcommunitymalakwahyb.onrender.com/chat", { user1: user._id, user2: speakerId })
+        .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: speakerId })
         .then((response) => {
           console.log(response.data.user);
           const users = response.data.user;
@@ -38,7 +38,7 @@ export default function NewChat({ onSpeakerChange }) {
 
   useEffect(() => {
     axios
-      .get("https://northtechcommunitymalakwahyb.onrender.com/user")
+      .get("https://northtechcommunity3.onrender.com/user")
       .then((response) => {
         const speakersData = response.data.message;
         if (Array.isArray(speakersData)) {

@@ -57,7 +57,7 @@ const{handleResponse}=props
     form.append("posted", users._id);
 console.log(selectedSpeakers);
     axios
-      .post("https://northtechcommunitymalakwahyb.onrender.com/event", form)
+      .post("https://northtechcommunity3.onrender.com/event", form)
       .then((response) => {
         console.log(response)
         handleResponse(response.data.message)
@@ -84,7 +84,7 @@ console.log(selectedSpeakers);
 
   return (
     <div className="PostShare">
-      <img src={`https://northtechcommunitymalakwahyb.onrender.com/${users.media}`} alt="" />
+      <img src={`https://northtechcommunity3.onrender.com/${users.media}`} alt="" />
       <div>
         <form onSubmit={handleSubmitPost}>
           <div className="NewEvent">

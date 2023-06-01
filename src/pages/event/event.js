@@ -51,7 +51,7 @@ function Event(){
       setIsLoading(true);
   
       axios
-        .get(`https://northtechcommunitymalakwahyb.onrender.com/event`) // Pass the logged-in user's ID as a query parameter
+        .get(`https://northtechcommunity3.onrender.com/event`) // Pass the logged-in user's ID as a query parameter
         .then((response) => {
      
         setPosts(response.data.message)
