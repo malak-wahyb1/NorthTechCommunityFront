@@ -16,7 +16,7 @@ import { useState } from "react";
 import { blue } from "@mui/material/colors";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import {  newChat } from "./logic";
+import {  getSender, newChat } from "./logic";
 import { Input } from "@mui/base";
 const emails = ["username@gmail.com", "user02@gmail.com"];
 
@@ -27,7 +27,7 @@ function SimpleDialog(props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false); // Track if search query is empty
   const dispatch = useDispatch();
-
+const [users,setUsers]=useState([])
   const handleClose = () => {
     onClose(selectedValue);
     setSearchQuery("");
@@ -36,27 +36,34 @@ function SimpleDialog(props) {
 
   const handleListItemClick = (value) => {
     onClose(value);
-   
+    if(value.user===user._id){
+      setUsers(value.friend._id)
+    }else{
+      setUsers(value.user._id)
+    }
     axios
-      .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: value })
+      .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: users })
       .then((response) => {
-      
-        const users = response.data.user;
+       const users = response.data.user;
         dispatch(storeNewChat(newChat(user, users)));
       })
       .catch((error) => {
-       
+       console.log(error)
       });
   };
 
   React.useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/user/${user._id}`)
+      .get(`https://northtechcommunity3.onrender.com/friend/accepted/${user._id}`)
       .then((response) => {
      console.log(response);
         setFriend1(response.data.message);
+     
+       
+
       })
       .catch((error) => {
+        console.log(error);
         
       });
   }, [user._id]);
@@ -84,6 +91,7 @@ function SimpleDialog(props) {
 
         {isSearching ? (
           friend1.map((email) => (
+
             <ListItem disableGutters>
               <ListItemButton
                 onClick={() => handleListItemClick(email)}
@@ -95,7 +103,7 @@ function SimpleDialog(props) {
                     <img src={`https://northtechcommunity3.onrender.com/${email.media}`} alt="" />
                   </Avatar>
                 </ListItemAvatar>
-                {email.first_name}
+               {email.friend._id===user._id?<span>{email.user.first_name}</span>:<span>{email.friend.first_name}</span>}
               </ListItemButton>
             </ListItem>
           ))

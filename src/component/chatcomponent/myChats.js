@@ -28,7 +28,7 @@ const [appLeftClass,setAppLeftClass]=useState("app-left")
     axios
       .get(`https://northtechcommunity3.onrender.com/chat?user1=${user1}`)
       .then((response) => {
-      
+      console.log(response);
         setChat(response.data);
       })
       .catch((error) => {
