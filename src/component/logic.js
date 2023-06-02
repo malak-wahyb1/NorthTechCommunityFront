@@ -40,6 +40,6 @@ export const isLastMessage = (messages, i, userId) => {
 
 export const isFriend=(user,friend)=>{
   axios.get(`https://northtechcommunity3.onrender.com/friend/${user._id}`).then((response)=>{
-    console.log(response)
-  }).catch((error)=>{console.log(error)});
+  
+  }).catch((error)=>{});
 }

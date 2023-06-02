@@ -18,7 +18,7 @@ function DeleteComponent(props) {
     setOpen(false);
   };
   const handleCloseDelete = () => {
-    console.log(props);
+
     setOpen(false);
 
     axios

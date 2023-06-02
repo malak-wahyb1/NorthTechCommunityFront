@@ -39,12 +39,12 @@ function ChatBox() {
         `https://northtechcommunity3.onrender.com/message/${selectedChat._id}`
       )
       .then((response) => {
-        console.log(response);
+       
         setChats(response.data.message);
         socket.emit("join chat", selectedChat);
       })
       .catch((error) => {
-        console.log(error);
+      
       });
   };
 
@@ -57,7 +57,7 @@ function ChatBox() {
         chatId: selectedChat._id,
       })
       .then((response) => {
-        console.log(user._id)
+        
         socket.emit(
           "new message",
           response.data.message[0],

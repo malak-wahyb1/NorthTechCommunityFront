@@ -24,15 +24,15 @@ const [appLeftClass,setAppLeftClass]=useState("app-left")
 
   useEffect(() => {
     const user1 = user._id;
-    console.log(user1);
+
     axios
       .get(`https://northtechcommunity3.onrender.com/chat?user1=${user1}`)
       .then((response) => {
-        console.log(response);
+      
         setChat(response.data);
       })
       .catch((error) => {
-        console.log(error);
+       
       });
   }, [user._id]);
   const handleselectChat = (chat) => {

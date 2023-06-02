@@ -41,7 +41,7 @@ function LoggedUser() {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.log(error);
+       
           setIsLoading(false);
         });
     
@@ -60,7 +60,7 @@ function LoggedUser() {
         setUser(response.data.message);
       })
       .catch((error) => {
-        console.log(error);
+     
       });
   }, [userId]);
 

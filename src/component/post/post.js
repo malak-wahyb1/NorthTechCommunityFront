@@ -26,7 +26,7 @@ function Post(props) {
       setIsAdmin(true);
     }
   }, [user]);
-  console.log(props.post)
+
   const handleCommentSubmit = () => {
     if (content.trim() === "") {
       return;
@@ -53,7 +53,7 @@ function Post(props) {
         .get(`https://northtechcommunity3.onrender.com/${user._id}/${props.post._id}`)
         .then((response) => {
           setComments(response.data.message);
-          console.log("ress",response)
+        
         })
         .catch((error) => {});
     } else {
@@ -126,7 +126,7 @@ function Post(props) {
   }, [props.post._id]);
   const handleFormResponse = (message) => {
     setPost(message);
-    console.log(post.user);
+
   };
   return (
     <>

@@ -29,12 +29,9 @@ function UserProfile() {
     axios
       .get(`https://northtechcommunity3.onrender.com/friend/All/${userId}`)
       .then((response) => {
-        console.log(response);
         setFriend(response.data.message);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [userId]);
 
   useEffect(() => {
@@ -76,7 +73,6 @@ function UserProfile() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
       });
   };
@@ -86,28 +82,19 @@ function UserProfile() {
       .then((response) => {
         setUser(response.data.message);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [userId]);
   const handleFriendRequest = () => {
-    console.log(userId);
-    console.log(users._id);
-
     axios
-      .put(
-        `https://northtechcommunity3.onrender.com/user/follow/${userId}/${users._id}`,
+      .post(
+        `https://northtechcommunity3.onrender.com/friend`,
         {
-          followId: userId,
-          senderId: users._id,
+          friend: users._id,
+          user: userId,
         }
       )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      .then((response) => {console.log(response);})
+      .catch((error) => {console.log(error);});
   };
   return (
     <>
@@ -143,7 +130,7 @@ function UserProfile() {
                     class="button2 btn-primary2"
                     onClick={handleFriendRequest}
                   >
-                    <i class="uil uil-plus"></i>Follow
+                    <i class="uil uil-plus"></i>Add Friend
                     <div class="btn-secondary2"></div>
                   </button>
                 </div>

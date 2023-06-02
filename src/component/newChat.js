@@ -19,20 +19,20 @@ export default function NewChat({ onSpeakerChange }) {
     if (typeof selectedValue === 'string') {
       const speaker = cities.find((city) => city.first_name === selectedValue);
       const speakerId = speaker ? speaker._id : null;
-      console.log(speakerId);
+      
       axios
         .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: speakerId })
         .then((response) => {
-          console.log(response.data.user);
+         
           const users = response.data.user;
           dispatch(storeNewChat(newChat(user, users)));
         })
         .catch((error) => {
-          console.log(error);
+       
         });
     } else {
       // Handle the case when selectedValue is not a string
-      console.log("Selected value is not a string:", selectedValue);
+  
     }
   };
 
@@ -49,7 +49,7 @@ export default function NewChat({ onSpeakerChange }) {
         }
       })
       .catch((error) => {
-        console.log(error);
+      
       });
   }, []);
 

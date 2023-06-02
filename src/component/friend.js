@@ -36,28 +36,28 @@ function SimpleDialog(props) {
 
   const handleListItemClick = (value) => {
     onClose(value);
-    console.log(user._id, value);
+   
     axios
       .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: value })
       .then((response) => {
-        console.log(response.data.user);
+      
         const users = response.data.user;
         dispatch(storeNewChat(newChat(user, users)));
       })
       .catch((error) => {
-        console.log(error);
+       
       });
   };
 
   React.useEffect(() => {
     axios
-      .get(`https://northtechcommunity3.onrender.com/user`)
+      .get(`https://northtechcommunity3.onrender.com/user/${user._id}`)
       .then((response) => {
-        console.log(response);
+     console.log(response);
         setFriend1(response.data.message);
       })
       .catch((error) => {
-        console.log(error);
+        
       });
   }, [user._id]);
 

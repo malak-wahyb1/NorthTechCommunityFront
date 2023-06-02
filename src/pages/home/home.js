@@ -21,17 +21,13 @@ function Home() {
   }, [user]);
 
   useEffect(() => {
-  
-
     axios
       .get(`https://northtechcommunity3.onrender.com/post`)
       .then((response) => {
-        console.log(response);
         setPosts(response.data.message);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
       });
   }, [user._id]); // Add user._id as a dependency to refetch posts when the user changes

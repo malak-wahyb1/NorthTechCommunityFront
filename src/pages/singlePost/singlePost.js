@@ -38,7 +38,7 @@ function SinglePost(props) {
         setComments(response.data.message);
       })
       .catch((error) => {
-        console.log(error);
+    
       });
   }, [postId]);
   const handleCommentSubmit = () => {
@@ -53,12 +53,12 @@ function SinglePost(props) {
     axios
       .post("https://northtechcommunity3.onrender.com/comment", commentBack)
       .then((response) => {
-        console.log(response);
+    
         setComments([...comments,response.data.message])
         setContent("");
       })
       .catch((error) => {
-        console.log(error);
+      
       });
   };
   useEffect(() => {
@@ -82,20 +82,20 @@ function SinglePost(props) {
       axios
         .post("https://northtechcommunity3.onrender.com/like", likeData)
         .then((response) => {
-          console.log(response);
+         
           localStorage.setItem(`liked_${postId}`, "true");
         })
         .catch((error) => {
-          console.log(error);
+        
         });
     } else {
       axios
         .delete(`https://northtechcommunity3.onrender.com/like/${currentUser._id}/${postId}`)
         .then((response) => {
-          console.log(response);
+          
         })
         .catch((error) => {
-          console.log(error);
+   
         });
 
       const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];

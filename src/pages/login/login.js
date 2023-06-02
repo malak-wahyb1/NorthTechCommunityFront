@@ -75,7 +75,7 @@ function LoginPage() {
     axios
       .post(`https://northtechcommunity3.onrender.com/user`, signUp)
       .then((response) => {
-        console.log(response);
+   
         if (response.data.token) {
           navigate(home);
           localStorage.setItem("token", response.data.token);
@@ -86,7 +86,7 @@ function LoginPage() {
         }
       })
       .catch((error) => {
-        console.log(error);
+     
       });
   };
   const handleSignUpClick = () => {

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
+
 const EventComponent = (props) => {
   const user = useSelector((state) => state.user);
 
@@ -60,7 +61,7 @@ const EventComponent = (props) => {
             {props.event.event_links?( <span className="blog-slider__code">
               <LinkIcon />
               <span>
-              {props.event.event_links}
+             <a href={props.event.event_links}>{props.event.event_links}</a> 
               </span>
             </span>):null}
            

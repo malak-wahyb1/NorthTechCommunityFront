@@ -15,7 +15,7 @@ export function AdminAcc() {
       .catch((error) => {});
   }, []);
   const handleFormResponse=(message)=>{
-    console.log(message);
+    
 setAdmin(...admin,message)
 
   }

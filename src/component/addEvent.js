@@ -47,19 +47,19 @@ const{handleResponse}=props
   const handleSubmitPost = (e) => {
     e.preventDefault();
     const form = new FormData();
-
+console.log(selectedCity)
     form.append("event_name", content);
-    form.append("event_link", link);
+    form.append("event_links", link);
     form.append("address", selectedCity);
     form.append("date", selectedDate);
     form.append("time", selectedTime);
     form.append("media", media);
     form.append("posted", users._id);
-console.log(selectedSpeakers);
+
     axios
       .post("https://northtechcommunity3.onrender.com/event", form)
       .then((response) => {
-        console.log(response)
+      
         handleResponse(response.data.message)
         toast.success("Event added successfully", {
           style: {
@@ -78,7 +78,13 @@ console.log(selectedSpeakers);
         setImage("");
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Try agin", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
   };
 

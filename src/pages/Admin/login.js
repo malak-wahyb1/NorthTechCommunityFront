@@ -36,7 +36,7 @@ export function Login(){
           dispatch(storeToken(response.data.token));
         })
         .catch((error) => {
-          console.log(error);
+     
           const err = error.response.data.message;
           toast.error(err, {
             style: {

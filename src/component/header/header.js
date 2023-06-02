@@ -44,6 +44,7 @@ function Header() {
             </div>
             <div className="user-settings">
               <img
+              crossOrigin='anonymous'
                 className="user-img"
                 src={`https://northtechcommunity3.onrender.com/${users.media}`}
                 alt=""
