@@ -58,7 +58,7 @@ export default function ResponsiveDatePickers({ onDateChange }) {
                 horizontal: 'left',
               }}
             >
-              <DatePicker value={date} onChange={handleDateChange} />
+              <DatePicker sx={{color:"white"}} value={date} onChange={handleDateChange} />
             </Popover>
           </Box>
         </DemoItem>

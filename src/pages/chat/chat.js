@@ -12,9 +12,6 @@ function Chat() {
         <div className="app-main">
           <ChatBox />
         </div>
-        <div className="app-right">
-          <Sender />
-        </div>
       </div>
     </section>
   );

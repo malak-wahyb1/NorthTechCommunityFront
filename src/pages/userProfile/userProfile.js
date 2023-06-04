@@ -4,78 +4,32 @@ import { useParams } from "react-router-dom";
 import Loading from "../../component/loading/loading";
 import Post from "../../component/post/post";
 import { useSelector } from "react-redux";
-
 import "./userProfile.css";
+import { toast } from "react-hot-toast";
 function UserProfile() {
   const users = useSelector((state) => state.user);
-
   const { userId } = useParams();
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [friend, setFriend] = useState([]);
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 200
-    ) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-  useEffect(() => {
-    axios
-      .get(`https://northtechcommunity3.onrender.com/friend/All/${userId}`)
-      .then((response) => {
-        setFriend(response.data.message);
-      })
-      .catch((error) => {});
-  }, [userId]);
+  const [isFriend, setIsFriend] = useState(false);
+ 
+
+
 
   useEffect(() => {
-    // const isUserFriend = friend.some(
-    //   (friendObj) => friendObj._id === users._id
-    // );
-    // setIsFriend(isUserFriend);
-  }, [friend, user, users]);
-
-  useEffect(() => {
-    fetchPosts();
-
-    // Clean up scroll event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!hasMore) return; // Stop fetching if there are no more pages
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [hasMore]);
-
-  const fetchPosts = () => {
-    if (isLoading) return; // Prevent fetching if already loading
-
-    setIsLoading(true);
 
     axios
       .get(`https://northtechcommunity3.onrender.com/post/user/${userId}`) // Adjust pageSize as per your requirement
       .then((response) => {
         setPosts(response.data.message);
-
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
       });
-  };
+  },[isLoading,userId])
   useEffect(() => {
     axios
       .get(`https://northtechcommunity3.onrender.com/user/${userId}`)
@@ -93,54 +47,98 @@ function UserProfile() {
           user: userId,
         }
       )
-      .then((response) => {console.log(response);})
-      .catch((error) => {console.log(error);});
+      .then((response) => {
+        toast.success("Request sent successfully", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      })
+      .catch((error) => {
+        toast.error("Try Again", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      });
   };
+
+  useEffect(() => {
+    axios
+      .get(`https://northtechcommunity3.onrender.com/friend/All/${userId}`)
+      .then((response) => {
+        setIsFriend(response.data.message.some((friend) => friend.user._id === users._id));
+        setIsFriend(response.data.message.some((friend) => friend.friend._id === users._id));
+      })
+      .catch((error) => {});
+  }, [userId, users._id]);
+
+
+
   return (
     <>
-      <div class="back-to-top"></div>
+      <div className="back-to-top"></div>
       <main>
-        <div class="user-header-wrapper flexbox">
-          <div class="user-header-inner flexbox">
-            <div class="user-header-overlay"></div>
+        <div className="user-header-wrapper flexbox">
+          <div className="user-header-inner flexbox">
+            <div className="user-header-overlay"></div>
             <img
-              class="user-header"
+              className="user-header"
               src={`https://northtechcommunity3.onrender.com/${user.media}`}
               alt=""
             />
           </div>
         </div>
-        <div class="user-info-bar">
-          <div class="ufo-bar-col3">
-            <div class="ufo-bar-col3-inner">
-              <div class="username-wrapper-outer">
-                <div class="username-wrapper">
-                  <h3 class="username-dev">
+        <div className="user-info-bar">
+          <div className="ufo-bar-col3">
+            <div className="ufo-bar-col3-inner">
+              <div className="username-wrapper-outer">
+                <div className="username-wrapper">
+                  <h3 className="username-dev">
                     {user.first_name} {user.last_name}
                   </h3>
                 </div>
               </div>
             </div>
           </div>
-          <div class="ufo-bar-col4">
-            <div class="ufo-bar-col4-inner">
-              <p>
-                <div class="ufo-bar-col4-inner">
-                  <button
-                    class="button2 btn-primary2"
-                    onClick={handleFriendRequest}
-                  >
-                    <i class="uil uil-plus"></i>Add Friend
-                    <div class="btn-secondary2"></div>
-                  </button>
-                </div>
-              </p>
+          <div className="ufo-bar-col4">
+            <div className="ufo-bar-col4-inner">
+            {!isFriend && (
+               
+                  <div className="ufo-bar-col4-inner">
+                    <button
+                      className="button2 btn-primary2"
+                      onClick={handleFriendRequest}
+                    >
+                      <i className="uil uil-plus"></i>Add Friend
+                      <div className="btn-secondary2"></div>
+                    </button>
+                  </div>
+               
+              )}
+                       {isFriend && (
+               
+               <div className="ufo-bar-col4-inner">
+                 <button
+                   className="button2 btn-primary2"
+               
+                 >
+                   <i className="uil uil-plus"></i>Unfriend
+                   <div className="btn-secondary2"></div>
+                 </button>
+               </div>
+            
+           )}
             </div>
           </div>
         </div>
 
         {posts.map((post) => {
-          return <Post post={post} />;
+          return <Post key={post._id} post={post} />;
         })}
         {isLoading && <Loading />}
       </main>

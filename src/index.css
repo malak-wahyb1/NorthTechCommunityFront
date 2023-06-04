@@ -50,3 +50,36 @@ background-color: #15bab3 !important;
 .MuiTouchRipple-root:hover{
   background-color: transparent !important;
 }
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color:white !important;
+  background-color: #15bab3;
+  font-family:sans-serif;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
+  color:white !important;
+  font-family:sans-serif;
+
+}
+.css-heg063-MuiTabs-flexContainer{
+  justify-content: center;
+}
+.acceptedFriend{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.acceptedFriend .unhotorized .unhotorizedcontainer{
+
+  margin: 0;
+}
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root{
+  z-index: 100;
+  color: white !important;
+  font-family: sans-serif;
+}
+label[data-shrink=false]+.MuiInputBase-formControl .css-1x51dt5-MuiInputBase-input-MuiInput-input{
+  background-color: var(--primary);
+}
+.MuiTypography-root #wrapper{
+width: 95%;
+}

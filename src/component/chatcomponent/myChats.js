@@ -96,22 +96,7 @@ const responsiveClose=()=>{
 
           <div className="chat-list-header">
             Chats <span className="c-number"></span>
-            <svg
-              className="list-header-arrow"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="3"
-              class="feather feather-chevron-up"
-              viewBox="0 0 24 24"
-            >
-              <defs />
-              <path d="M18 15l-6-6-6 6" />
-            </svg>
+        
           </div>
           <ul className="chat-list active">
             {chat.map((chat) => (
@@ -136,7 +121,7 @@ const responsiveClose=()=>{
                 </span>
               </li>
             ))}
-            {newchat ? (
+            {newchat.length>0?(
               <li
                 className={`chat-list-item ${
                   selectedChat === newchat ? "active" : ""
@@ -146,7 +131,7 @@ const responsiveClose=()=>{
                 <img src={`https://northtechcommunity3.onrender.com/${newchat.media}`} alt="" />
                 <span className="chat-list-name">{newchat.first_name}</span>
               </li>
-            ) : null}
+            ) :null}
           </ul>
         </div>
       </div>

@@ -18,6 +18,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import {  getSender, newChat } from "./logic";
 import { Input } from "@mui/base";
+import { useEffect } from "react";
 const emails = ["username@gmail.com", "user02@gmail.com"];
 
 function SimpleDialog(props) {
@@ -36,22 +37,31 @@ const [users,setUsers]=useState([])
 
   const handleListItemClick = (value) => {
     onClose(value);
-    if(value.user===user._id){
+   
+    if(value.user._id===user._id){
       setUsers(value.friend._id)
     }else{
       setUsers(value.user._id)
     }
-    axios
-      .post("https://northtechcommunity3.onrender.com/chat", { user1: user._id, user2: users })
-      .then((response) => {
-       const users = response.data.user;
-        dispatch(storeNewChat(newChat(user, users)));
-      })
-      .catch((error) => {
-       console.log(error)
-      });
   };
-
+  useEffect(() => {
+    if (users.length > 0) {
+      console.log('users', users)
+      axios
+        .post("https://northtechcommunity3.onrender.com/chat", {
+          user1: user._id,
+          user2: users
+        })
+        .then((response) => {
+          const usersData = response.data.user;
+          dispatch(storeNewChat(newChat(user, usersData)));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [users, user._id, dispatch,user]);
+  
   React.useEffect(() => {
     axios
       .get(`https://northtechcommunity3.onrender.com/friend/accepted/${user._id}`)
@@ -141,7 +151,8 @@ export default function Friend() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+
+      <Button sx={{boxShadow:"0 20px 50px rgba(0, 0, 0, 0.3)",color:"white",backgroundColor:"#15bab3"}} onClick={handleClickOpen}>
         New Chat
       </Button>
   

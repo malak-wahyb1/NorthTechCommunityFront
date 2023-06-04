@@ -1,6 +1,15 @@
+import axios from "axios";
 import { createStore } from "redux";
 
+
 const storedUser = localStorage.getItem("user");
+// axios.get(`https://northtechcommunity3.onrender.com/friend/All/${storedUser._id}`).then((response)=>{
+//  const friends=response.data.message;
+//  const storedFriends=[]
+//  friends.map((friend)=>(
+// {friend.friend._id===storedUser._id?(storedFriends.push(friend.user._id)):(storedFriends.push(friend.friend._id))}
+//  ))
+//   }).catch((error)=>{});
 const initialState = {
   token: localStorage.getItem("token"),
   loggedInUser: null,

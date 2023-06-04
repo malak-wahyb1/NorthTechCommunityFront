@@ -194,7 +194,17 @@ margin-top: 0;
   width: 90%;
  }
  .NewEvent {
+flex-wrap: wrap;
+ }
+ .NewEvent input{
+  margin-top: 0.4pc;
+  margin-bottom: 0.4pc;
+ }
+ .event .PostShare img{
   display: none;
+ }
+ .css-1domaf0{
+  width: 97% !important;
  }
  .postOptions .option{
   width: 40px;

@@ -168,7 +168,7 @@ function Post(props) {
           <p className="status">{post.description}</p>
           <img
             className="img-content"
-            src={`https://northtechcommunity3.onrender.com/${post.media}`}
+            src={post.media}
             alt=""
           />
         </section>

@@ -4,8 +4,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 import {  useSelector } from 'react-redux';
+import FriendComponent from './friend/friend';
+import { Link } from 'react-router-dom';
+import AcceptedFriend from './friend/acceptedFriend';
 function TabPanel(props) {
+
   const { children, value, index, ...other } = props;
   return (
     <div
@@ -40,7 +47,24 @@ function a11yProps(index) {
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
   const user = useSelector((state) => state.user);
-
+const [friendAcc,setFriendAcc]=useState([])
+  const [friend,setFriend]=useState([])
+    useEffect(()=>{
+  axios.get(`https://northtechcommunity3.onrender.com/friend/request/${user._id}`).then((response)=>{
+  console.log(response);
+  setFriend(response.data.message)
+  }).catch((err)=>{
+  console.log(err);
+  })
+    },[user._id])
+    useEffect(()=>{
+      axios.get(`https://northtechcommunity3.onrender.com/friend/accepted/${user._id}`).then((response)=>{
+        console.log(response);
+        setFriendAcc(response.data.message)
+        }).catch((err)=>{
+        console.log(err);
+        })
+      },[user._id])
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -49,16 +73,26 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Follow" {...a11yProps(0)} />
-          <Tab label="Follower" {...a11yProps(1)} />
+          <Tab label="Friend Request" {...a11yProps(0)} />
+          <Tab label="My Friend" {...a11yProps(1)} />
          
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {(user.followers.length>0)?("followers"):"nothing"}
+        {(friend.length>0)?( friend.map((friend) => (
+    <FriendComponent key={friend.id} friend={friend} />
+  ))):<section className='acceptedFriend'><div className='unhotorized'>
+  <div className="unhotorizedcontainer">
+    <div className="text">{'>_ '}<Link to=''>No request yet.</Link><span className="line">{'∣'}</span></div>
+  </div></div></section>}
       </TabPanel>
       <TabPanel value={value} index={1}>
-      {(user.following.length>0)?("following"):"nothing"}
+      {(friendAcc.length>0)?( friendAcc.map((friend) => (
+    <AcceptedFriend key={friend.id} friend={friend} />
+  ))):<section className='acceptedFriend'><div className='unhotorized'>
+  <div className="unhotorizedcontainer">
+    <div className="text">{'>_ '}<Link to=''>No friend yet.</Link><span className="line">{'∣'}</span></div>
+  </div></div></section>}
 
       </TabPanel>
     

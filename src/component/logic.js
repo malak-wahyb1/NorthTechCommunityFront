@@ -1,11 +1,10 @@
-import axios from "axios";
-
 export const getSender = (loggedUser, users) => {
   return users[0]._id === loggedUser._id
     ? users[1].first_name
     : users[0].first_name;
 };
 export const getImage = (loggedUser, users) => {
+if(!loggedUser||!users) return;
   return users[0]._id === loggedUser._id
     ? `https://northtechcommunity3.onrender.com/${users[1].media}`
     : `https://northtechcommunity3.onrender.com/${users[0].media}`;
@@ -38,8 +37,9 @@ export const isLastMessage = (messages, i, userId) => {
   );
 };
 
-export const isFriend=(user,friend)=>{
-  axios.get(`https://northtechcommunity3.onrender.com/friend/${user._id}`).then((response)=>{
+export const  isFriend=(user,friend)=>{
+
+   
   
-  }).catch((error)=>{});
+  
 }

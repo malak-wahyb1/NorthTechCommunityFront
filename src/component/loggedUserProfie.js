@@ -1,57 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { useSelector } from "react-redux";
 
-import Post from "./post/post";
-import Loading from "./loading/loading";
-
 import FormComponent from "./form";
+import LoggedUserTabs from "./loggedUserTab";
+import {
+  Email,
+  Facebook,
+  GitHub,
+  Instagram,
+  LinkedIn,
+  Twitter,
+} from "@mui/icons-material";
+import AddSocialmedia from "./socialmedialink";
 function LoggedUser() {
   const users = useSelector((state) => state.user);
-
   const { userId } = useParams();
-
   const [user, setUser] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [socialMedian, setSocialMedian] = useState([]);
 
-
- 
   const handleFormResponse = (message) => {
     setUser(message);
   };
-  
-
-  useEffect(() => {
-    
-      if (isLoading) return; // Prevent fetching if already loading
-  
-      setIsLoading(true);
-  
-      axios
-        .get(`https://northtechcommunity3.onrender.com/post/user/${userId}`) // Adjust pageSize as per your requirement
-        .then((response) => {
-          
-          setPosts(response.data.message);
-      
-          setIsLoading(false);
-        })
-        .catch((error) => {
-       
-          setIsLoading(false);
-        });
-    
-
- 
-  }, []);
-
- 
-
-  
 
   useEffect(() => {
     axios
@@ -59,42 +30,42 @@ function LoggedUser() {
       .then((response) => {
         setUser(response.data.message);
       })
-      .catch((error) => {
-     
-      });
+      .catch((error) => {});
   }, [userId]);
-
+  useEffect(() => {
+    axios
+      .get(
+        `https://northtechcommunitymalakwahyb.onrender.com/profile/${userId}`
+      )
+      .then((response) => {
+        console.log(response)
+        setSocialMedian(response.data.message);
+      })
+      .catch((error) => {});
+  }, [userId]);
   return (
     <>
-      <div class="back-to-top"></div>
+      <div className="back-to-top"></div>
       <main>
-        <div class="user-header-wrapper flexbox">
-          <div class="user-header-inner flexbox">
-            <div class="user-header-overlay"></div>
+        <div className="user-header-wrapper flexbox">
+          <div className="user-header-inner flexbox">
+            <div className="user-header-overlay"></div>
 
             <img
-              class="user-header"
-              src={`https://northtechcommunity3.onrender.com/${user.media}`}
+              className="user-header"
+              src={user.media}
               alt=""
             />
           </div>
         </div>
-        <div class="user-info-bar-logged">
-          <div class="ufo-bar-col3">
-            <div class="ufo-bar-col3-inner">
-              <div class="username-wrapper-outer">
-                <div class="username-wrapper">
-                  <h3 class="username-dev">
+        <div className="user-info-bar-logged">
+          <div className="ufo-bar-col3">
+            <div className="ufo-bar-col3-inner">
+              <div className="username-wrapper-outer">
+                <div className="username-wrapper">
+                  <h3 className="username-dev">
                     {user.first_name} {user.last_name}
                   </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="ufo-bar-col4">
-            <div class="ufo-bar-col4-inner">
-              <p>
-                <div class="ufo-bar-col4-inner">
                   <FormComponent
                     inputFields={[
                       { name: "first_name", label: "First Name", type: "text" },
@@ -106,15 +77,98 @@ function LoggedUser() {
                     url={`user/${users._id}`}
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="ufo-bar-col4">
+            <div className="ufo-bar-col4-inner">
+              <p>
+                <div className="ufo-bar-col4-inner"></div>
               </p>
             </div>
           </div>
+          <div className="ufo-bar-col4">
+            <div className="ufo-bar-col4-inner">
+              {setSocialMedian.length > 1 ? (
+                <div className="ufo-bar-col4-inner">
+                  <section className="social_media">
+                    <LinkedIn
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    />
+                  </section>
+                  <section className="social_media">
+                    <Email
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    />
+                  </section>
+                  <section className="social_media">
+                    <GitHub
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    />
+                  </section>
+                  <section className="social_media">
+                    <Facebook
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    />
+                  </section>
+                  <section className="social_media">
+                    <Instagram
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    />
+                  </section>
+                  <section className="social_media">
+                    <Twitter
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    />
+                  </section>
+                  <section className="social_media">
+                    <FormComponent
+                      inputFields={[
+                        { name: "Linkedin", label: "Linkedin", type: "text" },
+                        { name: "Email", label: "Email", type: "test" },
+                        { name: "Github", label: "Github", type: "test" },
+                        { name: "Facebook", label: "Facebook", type: "test" },
+                        { name: "Instagram", label: "Instagram", type: "test" },
+                        { name: "Twitter", label: "Twitter", type: "test" },
+                      ]}
+                      handleFormResponse={handleFormResponse}
+                      title="Profile"
+                      url={`profile/${users._id}`}
+                    />
+                  </section>
+                </div>
+              ) : (
+                <AddSocialmedia
+                  inputFields={[
+                    { name: "Linkedin", label: "Linkedin", type: "text" },
+                    { name: "Email", label: "Email", type: "test" },
+                    { name: "Github", label: "Github", type: "test" },
+                    { name: "Facebook", label: "Facebook", type: "test" },
+                    { name: "Instagram", label: "Instagram", type: "test" },
+                    { name: "Twitter", label: "Twitter", type: "test" },
+                  ]}
+                  handleFormResponse={handleFormResponse}
+                  title="Profile"
+                  url={`profile`}
+                  user={user._id}
+                />
+              )}
+            </div>
+          </div>
         </div>
-
-        {posts.map((post) => {
-          return <Post post={post} logged="true"/>;
-        })}
-        {isLoading && <Loading />}
+        <LoggedUserTabs userId={userId} />
       </main>
     </>
   );

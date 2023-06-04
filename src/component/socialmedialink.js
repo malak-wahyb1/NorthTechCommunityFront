@@ -12,14 +12,12 @@ import { useDispatch } from "react-redux";
 
 import { toast } from "react-hot-toast";
 import { Stack } from "@mui/system";
-import { useState } from "react";
+import { Add } from "@mui/icons-material";
 
-export default function FormComponent(props) {
+export default function AddSocialmedia(props) {
   const [open, setOpen] = React.useState(false);
   const [inputValues, setInputValues] = React.useState({});
   const [image, setImage] = React.useState(false);
-  const dispatch = useDispatch();
-  const [imgFromBB, setImgFromBB] = useState("");
   const { handleFormResponse } = props;
   const handleInputChange = (e) => {
     setInputValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -35,60 +33,38 @@ export default function FormComponent(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputValues)
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `https://northtechcommunity3.onrender.com/${props.url}`,
         inputValues
       );
-
-      localStorage.removeItem("user");
-
-      const token = localStorage.getItem("token");
-      localStorage.clear();
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(response.data.message));
+     console.log(response)
       handleFormResponse(response.data.message);
-      dispatch(storeUser(response.data.message));
-
-      toast.success("Edit successful");
+      toast.success("Links Added Successful");
     } catch (err) {
       toast.error(err.message);
     }
-    if (image) {
-      const fd = new FormData();
-      fd.append("image", image, image.name);
-      axios.post(
-        "https://api.imgbb.com/1/upload?key=8bcd9d41626f3d033a74947d3f950fda",
-        fd
-      ).then((response) => {
-        setImgFromBB(response.data.data.display_url);
-
-        axios.put( `https://northtechcommunity3.onrender.com/${props.url}`,
-        {media:response.data.data.display_url}).then((response) => {
-          localStorage.removeItem("user");
-  
-          const token = localStorage.getItem("token");
-          localStorage.clear();
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(response.data.message));
-          handleFormResponse(response.data.message);
-          dispatch(storeUser(response.data.message));
-          toast.success("Edit successful");
-        }).catch(err=>{
-          toast.error("Error add Admin, please try again");
-        })
-      }).catch((err) => {
-        console.log(err.message);
-      })
-     
-        
-      
+    if (props.user) {
+      const form = new FormData();
+      form.append("media", image);
+      try {
+        const response = await axios.post(
+          `https://northtechcommunity3.onrender.com/${props.url}`,
+          props.user
+        );
+       console.log(response)
+        handleFormResponse(response.data.message);
+        toast.success("Links Added Successful");
+      } catch (err) {
+        toast.error("Error add Admin, please try again");
+      }
     }
   };
 
   return (
     <section className="addForm">
-      <EditIcon
+      <Add
         sx={{
           color: "#15bab3",
           width: "30px",
@@ -98,11 +74,11 @@ export default function FormComponent(props) {
           },
         }}
         onClick={handleClickOpen}
+        
       />
-
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ color: "white", backgroundColor: "#24292f" }}>
-          Edit {props.title}
+          Add Social Media Link
         </DialogTitle>
 
         <DialogContent sx={{ backgroundColor: "#24292f", color: "white" }}>

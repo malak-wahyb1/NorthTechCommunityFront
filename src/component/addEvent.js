@@ -18,6 +18,7 @@ const EventShare = (props) => {
   const imageRef = useRef();
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [imgFromBB, setImgFromBB] = useState("");
   const [selectedSpeakers, setSelectedSpeakers] = useState([]);
 const{handleResponse}=props
   const onImageChange = (event) => {
@@ -46,18 +47,23 @@ const{handleResponse}=props
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
-    const form = new FormData();
-console.log(selectedCity)
-    form.append("event_name", content);
-    form.append("event_links", link);
-    form.append("address", selectedCity);
-    form.append("date", selectedDate);
-    form.append("time", selectedTime);
-    form.append("media", media);
-    form.append("posted", users._id);
 
-    axios
-      .post("https://northtechcommunity3.onrender.com/event", form)
+    const fd = new FormData();
+    fd.append("image", media, media.name);
+    axios.post(
+      "https://api.imgbb.com/1/upload?key=8bcd9d41626f3d033a74947d3f950fda",
+      fd
+    ).then((response) => {
+      axios
+      .post("https://northtechcommunity3.onrender.com/event", {
+        event_name:content,
+        event_links:link,
+        address:selectedCity,
+        date:selectedDate,
+        time:selectedTime,
+        media:response.data.data.display_url,
+        posted:users._id
+      })
       .then((response) => {
       
         handleResponse(response.data.message)
@@ -86,11 +92,15 @@ console.log(selectedCity)
           },
         });
       });
+    }).catch((err) => {
+      console.log(err.message);
+    })
+   
   };
 
   return (
     <div className="PostShare">
-      <img src={`https://northtechcommunity3.onrender.com/${users.media}`} alt="" />
+      <img src={users.media} alt="" />
       <div>
         <form onSubmit={handleSubmitPost}>
           <div className="NewEvent">

@@ -30,14 +30,14 @@ const EventComponent = (props) => {
         <div className="blog-slider__item swiper-slide">
           <div className="blog-slider__img">
             <img
-              src={`https://northtechcommunity3.onrender.com/${props.event.media}`}
+              src={props.event.media}
               alt=""
             />
           </div>
           <div className="blog-slider__content">
             <div className="blog-slider__title">
               <img
-                src={`https://northtechcommunity3.onrender.com/${props.event.posted.media}`}
+                src={props.event.posted.media}
                 alt=""
               />{" "}
               <span>{props.event.posted.first_name} {props.event.posted.last_name}</span>
