@@ -26,42 +26,70 @@ const PostShare = () => {
   };
   const handleSubmitPost = (e) => {
     e.preventDefault();
-  console.log(media)
-    const fd = new FormData();
-    fd.append("image", media, media.name);
-    axios.post(
-      "https://api.imgbb.com/1/upload?key=8bcd9d41626f3d033a74947d3f950fda",
-      fd
-    ).then((response) => {
-      console.log(response.data.data.display_url);
-      setImgFromBB(response.data.data.display_url);
-    }).catch((err) => {
-      console.log(err.message);
-    })
+if(media){
+  const fd = new FormData();
+  fd.append("image", media, media.name);
+  axios.post(
+    "https://api.imgbb.com/1/upload?key=8bcd9d41626f3d033a74947d3f950fda",
+    fd
+  ).then((response) => {
+    console.log(response.data.data.display_url);
     axios
-      .post("https://northtechcommunity3.onrender.com/post", {description:content,media:imgFromBB,user:users._id})
-      .then((response) => {
-        toast.success("Post added successfully", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
-        setContent("");
-        setMedia("");
-        setImage(null);
-      })
-      .catch((error) => {
-        console.log(error)
-        toast.error("Try Again", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
+    .post("https://northtechcommunity3.onrender.com/post", {description:content,media:response.data.data.display_url,user:users._id})
+    .then((response) => {
+      toast.success("Post added successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
       });
+      setContent("");
+      setMedia("");
+      setImage(null);
+    })
+    .catch((error) => {
+      console.log(error)
+      toast.error("Try Again", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    });
+  }).catch((err) => {
+    console.log(err.message);
+  })
+}else{
+ 
+  axios
+    .post("https://northtechcommunity3.onrender.com/post", {description:content,user:users._id})
+    .then((response) => {
+      toast.success("Post added successfully", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      setContent("");
+      setMedia("");
+      setImage(null);
+    })
+    .catch((error) => {
+      console.log(error)
+      toast.error("Try Again", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    });
+}
+   
+   
   };
   return (
     <div className="PostShare">

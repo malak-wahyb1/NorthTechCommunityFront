@@ -136,7 +136,7 @@ function Post(props) {
               {props.post.user && (
                 <img
                   className="profile-pic"
-                  src={`https://northtechcommunity3.onrender.com/${props.post.user.media}`}
+                  src={props.post.user.media}
                   alt=""
                 />
               )}
