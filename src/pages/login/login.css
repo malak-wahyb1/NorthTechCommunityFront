@@ -376,9 +376,11 @@ button.ghost {
 @media screen and (max-width: 768px) {
   .login_page {
     padding: 40px;
-    height: auto;
+ 
   }
-
+.login_page input{
+  padding: 15px 25px;
+}
   .container {
     width: 100%;
     height: auto;

@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { storeUser } from "../../redux/reducer";
 import { storeToken } from "../../redux/reducer";
+import SmallLoader from "../../component/smallLoading/smallloading";
 function LoginPage() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   const [email, setEmail] = useState();
@@ -18,6 +19,7 @@ function LoginPage() {
   const [signUpClass, setSignUpClass] = useState(
     "form-container sign-up-container"
   );
+  const [loading,setLoading]=useState(false)
   const [signUp, setSignUp] = useState([]);
   const location = useLocation();
   const { from: { pathname: home } = { pathname: "/user/home" } } =
@@ -36,12 +38,15 @@ function LoginPage() {
     }
   }, [navigate]);
   const loginRequest = () => {
+    setLoading(true)
     axios
       .post(`https://northtechcommunity3.onrender.com/user/login`, {
         email,
         password,
       })
       .then((response) => {
+        setLoading(false);
+
         navigate(home);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -50,6 +55,8 @@ function LoginPage() {
         dispatch(storeToken(response.data.token));
       })
       .catch((error) => {
+        setLoading(false);
+
         toast.error("username or password is incorrect", {
           style: {
             borderRadius: "10px",
@@ -70,11 +77,12 @@ function LoginPage() {
     }));
   };
   const handleSignUp = (e) => {
-    e.preventDefault();
-
+    setLoading(true)
+    e.preventDefault()
     axios
       .post(`https://northtechcommunity3.onrender.com/user`, signUp)
       .then((response) => {
+        setLoading(false);
    
         if (response.data.token) {
           navigate(home);
@@ -86,7 +94,14 @@ function LoginPage() {
         }
       })
       .catch((error) => {
-     
+        setLoading(false);
+        toast.error("Try again", {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       });
   };
   const handleSignUpClick = () => {
@@ -166,7 +181,8 @@ function LoginPage() {
               }}
             />
 
-            <button type="submit">Sign Up</button>
+           
+            {loading?<SmallLoader/>:  <button type="submit">Sign Up</button>}
           </form>
         </div>
         <div className={loginClass}>
@@ -190,10 +206,11 @@ function LoginPage() {
               }}
             />
             <Link className="signUpLink" onClick={handlelink}>
-              You don't have account,Sign up now!
+              You don't have account,<span style={{color:"#15bab3",fontSize:"14px"}}><b>Sign up now!</b></span>
             </Link>
 
-            <button type="submit">Sign In</button>
+           
+            {loading?<SmallLoader/>: <button type="submit">Sign In</button>}
           </form>
         </div>
         <div className="overlay-container">
@@ -218,6 +235,7 @@ function LoginPage() {
               <button className="ghost" onClick={handleSignUpClick}>
                 Sign Up
               </button>
+             
             </div>
           </div>
         </div>

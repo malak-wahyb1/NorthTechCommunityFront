@@ -35,6 +35,7 @@ export default function FormComponent(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  if(props.title==="profile"){
     try {
       const response = await axios.put(
         `https://northtechcommunity3.onrender.com/${props.url}`,
@@ -78,11 +79,20 @@ export default function FormComponent(props) {
           toast.error("Error add Admin, please try again");
         })
       }).catch((err) => {
-        console.log(err.message);
+  
       })
      
         
       
+    }}else{
+      console.log(inputValues)
+      axios.put( `https://northtechcommunity3.onrender.com/${props.url}`,inputValues).then((response) => {
+        toast.success("Edit successful");
+console.log(response);
+      }).catch((err) => {
+        toast.error("Try again");
+
+      })
     }
   };
 
@@ -111,7 +121,7 @@ export default function FormComponent(props) {
               if (input.type === "file") {
                 return (
                   <>
-                    <Stack direction="row" alignItems="center" spacing={2}>
+                    <Stack direction="row" alignItems="center" spacing={2} key={index}>
                       <Button
                         variant="outlined"
                         component="label"

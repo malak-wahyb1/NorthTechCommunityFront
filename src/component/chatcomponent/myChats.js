@@ -28,7 +28,7 @@ const [appLeftClass,setAppLeftClass]=useState("app-left")
     axios
       .get(`https://northtechcommunity3.onrender.com/chat?user1=${user1}`)
       .then((response) => {
-      console.log(response);
+
         setChat(response.data);
       })
       .catch((error) => {
@@ -128,7 +128,7 @@ const responsiveClose=()=>{
                 }`}
                 onClick={() => setSelectedChat(newchat)}
               >
-                <img src={`https://northtechcommunity3.onrender.com/${newchat.media}`} alt="" />
+                <img src={newchat.media} alt="" />
                 <span className="chat-list-name">{newchat.first_name}</span>
               </li>
             ) :null}

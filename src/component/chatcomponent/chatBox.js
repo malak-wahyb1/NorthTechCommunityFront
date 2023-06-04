@@ -113,7 +113,7 @@ function ChatBox() {
                  {(m.sender._id ===user._id)?( <div className="message-wrapper reverse">
                       <img
                         className="message-pp"
-                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        src={m.sender.media}
                         alt="profile-pic"
                       />
                       <div className="message-box-wrapper">
@@ -123,7 +123,7 @@ function ChatBox() {
                     </div>):(<div className="message-wrapper">
                       <img
                         className="message-pp"
-                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
+                        src={m.sender.media}
                         alt="profile-pic"
                       />
                       <div className="message-box-wrapper">

@@ -48,6 +48,7 @@ function UserProfile() {
         }
       )
       .then((response) => {
+        setIsFriend(response)
         toast.success("Request sent successfully", {
           style: {
             borderRadius: "10px",
@@ -88,7 +89,7 @@ function UserProfile() {
             <div className="user-header-overlay"></div>
             <img
               className="user-header"
-              src={`https://northtechcommunity3.onrender.com/${user.media}`}
+              src={user.media}
               alt=""
             />
           </div>
@@ -120,19 +121,7 @@ function UserProfile() {
                   </div>
                
               )}
-                       {isFriend && (
-               
-               <div className="ufo-bar-col4-inner">
-                 <button
-                   className="button2 btn-primary2"
-               
-                 >
-                   <i className="uil uil-plus"></i>Unfriend
-                   <div className="btn-secondary2"></div>
-                 </button>
-               </div>
-            
-           )}
+                 
             </div>
           </div>
         </div>

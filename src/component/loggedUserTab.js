@@ -77,15 +77,13 @@ export default function LoggedUserTabs(props) {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="My Posts" {...a11yProps(0)} />
-          <Tab label="Experience" {...a11yProps(1)} />
-          <Tab label="Education" {...a11yProps(2)} />
+         
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
        <>
         {posts.map((post) => {
-          return <Post post={post} logged="true"/>;
+          return <Post post={post} logged="true" key={post._id}/>;
         })}
         {isLoading && <Loading />}
        </>

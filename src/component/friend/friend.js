@@ -1,5 +1,6 @@
 import "./friend.css";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 function FriendComponent(props) {
   const acceptFriend = () => {
     axios
@@ -8,7 +9,7 @@ function FriendComponent(props) {
         { accepted: true }
       )
       .then((friend) => {
-        console.log(friend);
+   toast.success("accepted successfully")
       })
       .catch((err) => {});
   };

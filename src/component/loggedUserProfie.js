@@ -38,8 +38,9 @@ function LoggedUser() {
         `https://northtechcommunitymalakwahyb.onrender.com/profile/${userId}`
       )
       .then((response) => {
-        console.log(response)
+       
         setSocialMedian(response.data.message);
+        console.log(response.data)
       })
       .catch((error) => {});
   }, [userId]);
@@ -82,57 +83,57 @@ function LoggedUser() {
           </div>
           <div className="ufo-bar-col4">
             <div className="ufo-bar-col4-inner">
-              <p>
+         
                 <div className="ufo-bar-col4-inner"></div>
-              </p>
+            
             </div>
           </div>
           <div className="ufo-bar-col4">
             <div className="ufo-bar-col4-inner">
-              {setSocialMedian.length > 1 ? (
+              {socialMedian?(
                 <div className="ufo-bar-col4-inner">
-                  <section className="social_media">
-                    <LinkedIn
+                
+                   {socialMedian.Linkedin?(<section className="social_media"> <LinkedIn
                       sx={{
                         "&:hover": { color: "#15bab3", cursor: "pointer" },
                       }}
-                    />
-                  </section>
-                  <section className="social_media">
-                    <Email
+                    /></section>):null}
+                  
+                
+                  {socialMedian.Email?  <section className="social_media"><Email
                       sx={{
                         "&:hover": { color: "#15bab3", cursor: "pointer" },
                       }}
-                    />
-                  </section>
-                  <section className="social_media">
-                    <GitHub
+                    /> </section>:null}  
+                 
+                 
+                  {socialMedian.Github?<section className="social_media"><GitHub
                       sx={{
                         "&:hover": { color: "#15bab3", cursor: "pointer" },
                       }}
-                    />
-                  </section>
-                  <section className="social_media">
-                    <Facebook
+                    /></section>:null}
+                  
+                
+                  {socialMedian.Facebook?<section className="social_media"><Facebook
                       sx={{
                         "&:hover": { color: "#15bab3", cursor: "pointer" },
                       }}
-                    />
-                  </section>
-                  <section className="social_media">
-                    <Instagram
+                    /></section>:null}
+                  
+                 
+                  {socialMedian.Instagram? <section className="social_media"> <Instagram
                       sx={{
                         "&:hover": { color: "#15bab3", cursor: "pointer" },
                       }}
-                    />
-                  </section>
-                  <section className="social_media">
-                    <Twitter
+                    /> </section>:null}
+                 
+                  
+                  {socialMedian.Twitter?<section className="social_media"><Twitter
                       sx={{
                         "&:hover": { color: "#15bab3", cursor: "pointer" },
                       }}
-                    />
-                  </section>
+                    /> </section>:null}
+                
                   <section className="social_media">
                     <FormComponent
                       inputFields={[
@@ -162,7 +163,7 @@ function LoggedUser() {
                   handleFormResponse={handleFormResponse}
                   title="Profile"
                   url={`profile`}
-                  user={user._id}
+                  user={users._id}
                 />
               )}
             </div>

@@ -6,8 +6,8 @@ export const getSender = (loggedUser, users) => {
 export const getImage = (loggedUser, users) => {
 if(!loggedUser||!users) return;
   return users[0]._id === loggedUser._id
-    ? `https://northtechcommunity3.onrender.com/${users[1].media}`
-    : `https://northtechcommunity3.onrender.com/${users[0].media}`;
+    ? users[1].media
+    : users[0].media;
 };
 export const Friendacc = (loggedUser, users) => {
   return users[0]._id === loggedUser._id

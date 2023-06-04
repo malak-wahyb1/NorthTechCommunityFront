@@ -51,18 +51,18 @@ const [friendAcc,setFriendAcc]=useState([])
   const [friend,setFriend]=useState([])
     useEffect(()=>{
   axios.get(`https://northtechcommunity3.onrender.com/friend/request/${user._id}`).then((response)=>{
-  console.log(response);
+
   setFriend(response.data.message)
   }).catch((err)=>{
-  console.log(err);
+ 
   })
     },[user._id])
     useEffect(()=>{
       axios.get(`https://northtechcommunity3.onrender.com/friend/accepted/${user._id}`).then((response)=>{
-        console.log(response);
+      ;
         setFriendAcc(response.data.message)
         }).catch((err)=>{
-        console.log(err);
+     
         })
       },[user._id])
   const handleChange = (event, newValue) => {

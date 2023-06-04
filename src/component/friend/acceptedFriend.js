@@ -32,7 +32,7 @@ function AcceptedFriend(props) {
             <div className="profile">
               <div className="pic">
                 <img
-                  src={`https://northtechcommunity3.onrender.com/${props.friend.user.media}`}
+                  src={props.friend.user.media}
                   alt=""
                 />
               </div>

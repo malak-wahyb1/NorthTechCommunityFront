@@ -69,19 +69,25 @@ export default function CountrySelect(onCityChange) {
     
     "online"
   ];
-const handleCityChange=(newChange)=>{
-setCity(newChange)
-onCityChange(newChange)
-}
+  const handleCityChange = (event, newCity) => {
+    setCity(newCity);
+    onCityChange(newCity);
+  };
+
   return (
-    <Box sx={{ width: 200}} >
+    <Box sx={{ width: 200 }}>
       <Autocomplete
         disablePortal
         options={cities}
         renderInput={(params) => (
-          <TextField {...params} label={<LocationCity sx={{color:"gray"}}/>} onChange={handleCityChange} value={city}    sx={{borderRadius:"15" ,color:"white"}}/>
+          <TextField
+            {...params}
+            label={<LocationCity sx={{ color: "gray" }} />}
+            onChange={handleCityChange}
+            value={city}
+            sx={{ borderRadius: "15", color: "white" }}
+          />
         )}
-    
       />
     </Box>
   );

@@ -46,13 +46,14 @@ const [users,setUsers]=useState([])
   };
   useEffect(() => {
     if (users.length > 0) {
-      console.log('users', users)
+   
       axios
         .post("https://northtechcommunity3.onrender.com/chat", {
           user1: user._id,
           user2: users
         })
         .then((response) => {
+          console.log(response);
           const usersData = response.data.user;
           dispatch(storeNewChat(newChat(user, usersData)));
         })
@@ -66,14 +67,14 @@ const [users,setUsers]=useState([])
     axios
       .get(`https://northtechcommunity3.onrender.com/friend/accepted/${user._id}`)
       .then((response) => {
-     console.log(response);
+  console.log(response)
         setFriend1(response.data.message);
      
        
 
       })
       .catch((error) => {
-        console.log(error);
+     
         
       });
   }, [user._id]);
@@ -110,7 +111,7 @@ const [users,setUsers]=useState([])
                 <ListItemAvatar>
                   <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                     <PersonIcon />
-                    <img src={`https://northtechcommunity3.onrender.com/${email.media}`} alt="" />
+                    <img src={email.media} alt="" />
                   </Avatar>
                 </ListItemAvatar>
                {email.friend._id===user._id?<span>{email.user.first_name}</span>:<span>{email.friend.first_name}</span>}

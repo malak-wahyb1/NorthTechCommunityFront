@@ -5,11 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
-import { storeUser } from "../redux/reducer";
-import { useDispatch } from "react-redux";
-
 import { toast } from "react-hot-toast";
 import { Stack } from "@mui/system";
 import { Add } from "@mui/icons-material";
@@ -33,33 +29,24 @@ export default function AddSocialmedia(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputValues)
-    try {
-      const response = await axios.post(
-        `https://northtechcommunity3.onrender.com/${props.url}`,
-        inputValues
-      );
-     console.log(response)
-      handleFormResponse(response.data.message);
-      toast.success("Links Added Successful");
-    } catch (err) {
-      toast.error(err.message);
-    }
-    if (props.user) {
+  
+    
+    
+    
       const form = new FormData();
       form.append("media", image);
       try {
         const response = await axios.post(
           `https://northtechcommunity3.onrender.com/${props.url}`,
-          props.user
+         {user:props.user, ...inputValues}
         );
-       console.log(response)
+       
         handleFormResponse(response.data.message);
         toast.success("Links Added Successful");
       } catch (err) {
         toast.error("Error add Admin, please try again");
       }
-    }
+    
   };
 
   return (

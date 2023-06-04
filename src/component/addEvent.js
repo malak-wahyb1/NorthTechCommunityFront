@@ -8,7 +8,8 @@ import ResponsiveDatePickers from "./datePicker";
 import ResponsiveTimePickers from "./timePicker";
 import CountrySelect from "./location";
 import SendIcon from '@mui/icons-material/Send';
-const EventShare = (props) => {
+
+const EventShare = () => {
   const users = useSelector((state) => state.user);
   const [content, setContent] = useState("");
   const [link, setLink] = useState("");
@@ -18,9 +19,8 @@ const EventShare = (props) => {
   const imageRef = useRef();
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [imgFromBB, setImgFromBB] = useState("");
   const [selectedSpeakers, setSelectedSpeakers] = useState([]);
-const{handleResponse}=props
+
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
@@ -40,63 +40,63 @@ const{handleResponse}=props
   };
 
   const handleCityChange = (city) => {
+    console.log(city)
     setSelectedCity(city);
   };
-
-
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
 
     const fd = new FormData();
     fd.append("image", media, media.name);
-    axios.post(
-      "https://api.imgbb.com/1/upload?key=8bcd9d41626f3d033a74947d3f950fda",
-      fd
-    ).then((response) => {
-      axios
-      .post("https://northtechcommunity3.onrender.com/event", {
-        event_name:content,
-        event_links:link,
-        address:selectedCity,
-        date:selectedDate,
-        time:selectedTime,
-        media:response.data.data.display_url,
-        posted:users._id
-      })
+    axios
+      .post(
+        "https://api.imgbb.com/1/upload?key=8bcd9d41626f3d033a74947d3f950fda",
+        fd
+      )
       .then((response) => {
-      
-        handleResponse(response.data.message)
-        toast.success("Event added successfully", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
-        setContent("");
-        setLink("");
-        setSelectedDate("");
-        setSelectedTime("");
-        setSelectedCity("");
-        setSelectedSpeakers([]);
-        setMedia("");
-        setImage("");
+        axios
+          .post("https://northtechcommunity3.onrender.com/event", {
+            event_name: content,
+            event_links: link,
+            address: selectedCity,
+            date: selectedDate,
+            time: selectedTime,
+            media: response.data.data.display_url,
+            posted: users._id
+          })
+          .then((response) => {
+            toast.success("Event added successfully", {
+              style: {
+                borderRadius: "10px",
+                background: "#333",
+                color: "#fff",
+              },
+            });
+            setContent("");
+            setLink("");
+            setSelectedDate(null);
+            setSelectedTime(null);
+            setSelectedCity(null);
+            setSelectedSpeakers([]);
+            setMedia(null);
+            setImage(null);
+          })
+          .catch((error) => {
+            toast.error("Try again", {
+              style: {
+                borderRadius: "10px",
+                background: "#333",
+                color: "#fff",
+              },
+            });
+          });
       })
-      .catch((error) => {
-        toast.error("Try agin", {
-          style: {
-            borderRadius: "10px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
+      .catch((err) => {
+        console.error(err);
       });
-    }).catch((err) => {
-      console.log(err.message);
-    })
-   
   };
+
 
   return (
     <div className="PostShare">
@@ -114,7 +114,7 @@ const{handleResponse}=props
               required
             />
 
-            <CountrySelect onCityChange={handleCityChange} />
+<CountrySelect onCityChange={handleCityChange} />
        
             <input
               type="link"
