@@ -199,7 +199,7 @@ function Post(props) {
                 <li>
                   <div className="commenterImage">
                     <img
-                      src={`https://northtechcommunity3.onrender.com/${comment.user.media}`}
+                      src={comment.user.media}
                       alt=""
                     />
                   </div>
@@ -217,7 +217,7 @@ function Post(props) {
 
           <div className="commentBox">
             <img
-              src={`https://northtechcommunity3.onrender.com/${user.media}`}
+              src={user.media}
               alt=""
               className="user-img"
             />
@@ -228,7 +228,12 @@ function Post(props) {
                 setContent(e.target.value);
               }}
               onKeyDown={handleKeyDown}
-            ></input>
+            >
+            </input>
+            <button className="chat-send-btn commentbtn" onClick={handleCommentSubmit}>
+       
+        </button>
+            
           </div>
           <div className="commentHelper">
             <div className="icon comment"></div>

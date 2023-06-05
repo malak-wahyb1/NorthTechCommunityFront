@@ -22,7 +22,7 @@ export function Users() {
     { field: "phone", headerName: "Phone", width: 250 },
 
     { field: "media", headerName: "Image", width: 200,renderCell:(params)=>{
-        return <Avatar alt="Remy Sharp" src={`https://northtechcommunity3.onrender.com/${params.row.media}`} />
+        return <Avatar alt="Remy Sharp" src={params.row.media} />
       }  },
     {
       field: "Action",

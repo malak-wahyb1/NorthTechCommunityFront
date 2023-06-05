@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AddForm from "../../component/addForm";
+import AddAdminForm from "../../component/addAdmin";
+
 import DeleteComponent from "../../component/editpost";
 import DataGridPremiumDemo from "../../component/table";
 import "./admin.css";
@@ -15,8 +16,8 @@ export function AdminAcc() {
       .catch((error) => {});
   }, []);
   const handleFormResponse=(message)=>{
-    
-setAdmin(...admin,message)
+//     console.log(message);
+// setAdmin(...admin,message)
 
   }
   const columns = [
@@ -28,14 +29,14 @@ setAdmin(...admin,message)
       headerName: "Action",
       width: 275,
       renderCell: (params) => {
-        return <DeleteComponent url="admin" Id={params.row._id} />;
+        return <DeleteComponent title="admin" url="admin" Id={params.row._id} />;
       },
     },
   ];
   return (
     <div className="adminAcc">
       <section><h1>Admin </h1>
-      <AddForm    inputFields={[
+      <AddAdminForm    inputFields={[
                   { name: "username", label: "username", type: "text" },
                   { name: "password", label: "password", type: "text" },
 

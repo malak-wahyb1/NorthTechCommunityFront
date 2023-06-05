@@ -116,6 +116,9 @@
 .side-wrapper + .side-wrapper {
   border-bottom: none;
 }
+.commentbtn{
+  display: none;
+}
 
 @media only screen and (max-width: 768px) {
   /* .sidebar {
@@ -220,6 +223,9 @@ flex-wrap: wrap;
  .blog-slider{
   width: 70%;
   min-width: 0;
+ }
+ .commentbtn{
+  display:block ;
  }
 }
 .Bottom{

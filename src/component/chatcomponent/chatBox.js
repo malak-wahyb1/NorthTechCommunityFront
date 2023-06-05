@@ -85,31 +85,6 @@ function ChatBox() {
             {chats &&
               chats.map((m, i) => (
                 <React.Fragment key={i}>
-                  {/* {(isSameSender(chats, m, i, user._id) ||
-                    isLastMessage(chats, i, user._id)) && (
-                    <div className="message-wrapper">
-                      <img
-                        className="message-pp"
-                        src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
-                        alt="profile-pic"
-                      />
-                      <div className="message-box-wrapper">
-                        <div className="message-box">{m.content}</div>
-                        <span>9h ago</span>
-                      </div>
-                    </div>
-                  )}
-                  <div className="message-wrapper reverse">
-                    <img
-                      className="message-pp"
-                      src={`https://northtechcommunity3.onrender.com/${m.sender.media}`}
-                      alt="profile-pic"
-                    />
-                    <div className="message-box-wrapper">
-                      <div className="message-box">{m.content}</div>
-                      <span>9h ago</span>
-                    </div>
-                  </div> */}
                  {(m.sender._id ===user._id)?( <div className="message-wrapper reverse">
                       <img
                         className="message-pp"

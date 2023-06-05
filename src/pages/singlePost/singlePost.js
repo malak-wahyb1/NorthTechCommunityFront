@@ -125,7 +125,7 @@ function SinglePost(props) {
             <a>
               <img
                 className="profile-pic"
-                src={`https://northtechcommunity3.onrender.com/${user.media}`}
+                src={user.media}
                 alt=""
               />
             </a>
@@ -141,9 +141,10 @@ function SinglePost(props) {
           <p className="status">{post.description}</p>
           <img
             className="img-content"
-            src={`https://northtechcommunity3.onrender.com/${post.media}`}
+            src={post.media}
             alt=""
           />
+                  <div className="borderTop"></div>
 
           <div className="action">
             <div className="like">
@@ -161,6 +162,7 @@ function SinglePost(props) {
               </a>
             </div>
           </div>
+
           <div>
             {comments &&
               comments.map((comment, i) => {
@@ -169,7 +171,7 @@ function SinglePost(props) {
                     <li>
                       <div class="commenterImage">
                         <img
-                          src={`https://northtechcommunity3.onrender.com/${comment.user.media}`}
+                          src={comment.user.media}
                           alt=""
                         />
                       </div>
@@ -187,7 +189,7 @@ function SinglePost(props) {
 
             <div className="commentBox">
               <img
-                src={`https://northtechcommunity3.onrender.com/${user.media}`}
+                src={user.media}
                 alt=""
                 className="user-img"
               />

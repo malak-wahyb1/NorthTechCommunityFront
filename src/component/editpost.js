@@ -20,7 +20,7 @@ function DeleteComponent(props) {
   const handleCloseDelete = () => {
 
     setOpen(false);
-
+console.log(props.url,props.Id)
     axios
       .delete(`https://northtechcommunity3.onrender.com/${props.url}/${props.Id}`)
       .then((response) => {
@@ -34,6 +34,7 @@ function DeleteComponent(props) {
        
       })
       .catch((error) => {
+        console.log(error)
         toast.error("try again", {
             style: {
               borderRadius: "10px",
