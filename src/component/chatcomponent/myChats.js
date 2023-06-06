@@ -58,16 +58,7 @@ const responsiveClose=()=>{
           <Close onClick={responsiveClose}/>
         </div>
       <div className={appLeftClass}>
-        <div className="app-left-header">
-          <div className="app-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <ChatBubbleOutline />
-            </svg>
-          </div>
-          <h1>
-            <Link to="/user/home">North Tech Community</Link>
-          </h1>
-        </div>
+     
         <div className="app-profile-box">
           {selectedChat ? (
             <>

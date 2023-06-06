@@ -62,4 +62,9 @@
     50% { opacity: 0; }
     75% { opacity: 1; }
   }
-  
+  .chatNo{
+    width:30px;
+  }
+  .chatNo .unhotorizedcontainer{
+    width:580px;
+  }

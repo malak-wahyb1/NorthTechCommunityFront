@@ -429,4 +429,21 @@ display: block;
   .login_page button{
     margin-bottom: 1pc;
   }
+  .siginupname{
+    flex-wrap: wrap;
+  }
+  .siginupname input{
+    padding: 15px 25px;
+    margin: 15px 0;
+    width:100%;
+  }
+  .showing form{
+  padding: 0 6px;
+  }
+  .header{
+    padding: 0 !important;
+  }
+  .PostShare>img{
+    display: none;
+  }
 }

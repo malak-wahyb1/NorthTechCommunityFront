@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ScrollableFeed from "react-scrollable-feed";
 import React from "react";
 import io from "socket.io-client";
+import { Link } from "react-router-dom";
 
 const ENDPOINT = "https://northtechcommunity3.onrender.com";
 var socket, selectedChatCompare;
@@ -75,11 +76,12 @@ function ChatBox() {
     <>
       <div className="chat-wrapper">
        
-        {!selectedChat && (
-          <h1 className="start-chat-message">
-            Click On The User To Start Chatting
-          </h1>
-        )}
+        {/* {!selectedChat && (
+          <div className='unhotorized chatNo'>
+          <div className="unhotorizedcontainer">        
+            <div className="text">{'>_ '}<Link to='/'>No Chat Selected.</Link><span className="line">{'∣'}</span></div>
+          </div></div>
+        )} */}
         {selectedChat && (
           <ScrollableFeed>
             {chats &&

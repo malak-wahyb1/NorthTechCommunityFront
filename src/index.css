@@ -83,3 +83,8 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-1x51dt5-MuiInputBase-inp
 .MuiTypography-root #wrapper{
 width: 95%;
 }
+.css-ahj2mt-MuiTypography-root{
+  display: flex;
+
+  flex-wrap: wrap;
+}

@@ -7,7 +7,6 @@
   flex-shrink: 0;
   background-color: var(--primary);
   transition-duration: 0.2s;
-  overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
 }
@@ -35,7 +34,7 @@
 .sidebar-link:hover,
 .sidebar-link.is-active {
   color: #fff;
-  font-weight: 600;
+
 }
 .sidebar-link:hover:nth-child(2n + 1) svg,
 .sidebar-link.is-active:nth-child(2n + 1) svg {
@@ -227,6 +226,10 @@ flex-wrap: wrap;
  .commentbtn{
   display:block ;
  }
+ .chatNo .unhotorizedcontainer{
+  width:250px !important;
+}
+
 }
 .Bottom{
   display: none;

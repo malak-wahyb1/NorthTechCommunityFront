@@ -74,7 +74,7 @@
 @media screen and (max-width: 768px) {
   .blog-slider__img {
     transform: translateY(-50%);
-    width: 90%;
+   
   }
 }
 @media screen and (max-width: 576px) {
@@ -95,6 +95,9 @@
     margin-top: -80px;
 
     padding: 0 30px;
+  }
+  .blog-slider__item{
+    justify-content: space-evenly;
   }
 }
 

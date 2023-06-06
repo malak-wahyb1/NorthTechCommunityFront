@@ -6,12 +6,21 @@ import Post from "../../component/post/post";
 import { useSelector } from "react-redux";
 import "./userProfile.css";
 import { toast } from "react-hot-toast";
+import {
+  Email,
+  Facebook,
+  GitHub,
+  Instagram,
+  LinkedIn,
+  Twitter,
+} from "@mui/icons-material";
 function UserProfile() {
   const users = useSelector((state) => state.user);
   const { userId } = useParams();
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [socialMedian, setSocialMedian] = useState([]);
 
   const [isFriend, setIsFriend] = useState(false);
  
@@ -78,7 +87,18 @@ function UserProfile() {
       .catch((error) => {});
   }, [userId, users._id]);
 
-
+  useEffect(() => {
+    axios
+      .get(
+        `https://northtechcommunitymalakwahyb.onrender.com/profile/${userId}`
+      )
+      .then((response) => {
+       
+        setSocialMedian(response.data.message);
+        console.log(response.data)
+      })
+      .catch((error) => {});
+  }, [userId]);
 
   return (
     <>
@@ -104,6 +124,56 @@ function UserProfile() {
                   </h3>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="ufo-bar-col4">
+            <div className="ufo-bar-col4-inner">
+              {socialMedian?(
+                <div className="ufo-bar-col4-inner">
+                
+                   {socialMedian.Linkedin?(<section className="social_media"> <LinkedIn
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    /></section>):null}
+                  
+                
+                  {socialMedian.Email?  <section className="social_media"><Email
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    /> </section>:null}  
+                 
+                 
+                  {socialMedian.Github?<section className="social_media"><GitHub
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    /></section>:null}
+                  
+                
+                  {socialMedian.Facebook?<section className="social_media"><Facebook
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    /></section>:null}
+                  
+                 
+                  {socialMedian.Instagram? <section className="social_media"> <Instagram
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    /> </section>:null}
+                 
+                  
+                  {socialMedian.Twitter?<section className="social_media"><Twitter
+                      sx={{
+                        "&:hover": { color: "#15bab3", cursor: "pointer" },
+                      }}
+                    /> </section>:null}
+                </div>
+             
+              ):null}
             </div>
           </div>
           <div className="ufo-bar-col4">

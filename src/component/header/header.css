@@ -69,12 +69,27 @@
   border: 1px solid var(--theme-bg);
   top: -2px;
 }
+.search-bar .logoSearch{
+  display: none;
+}
 @media screen and (max-width: 575px) {
   .user-settings .notify .notification {
     display: none;
   }
+  .search-bar input{
+    display: none;
+  }
+  .search-bar .logoSearch{
+    display: block;
+  }
+  .search-bar {
+    height:150px;
+  }
+  .home-container{
+    margin-top: 0;
+  }
 }
-.user-img {
+.user-img ,.userSearched{
   width: 38px;
   height: 38px;
   flex-shrink: 0;
@@ -86,4 +101,26 @@
   color: #fff;
   font-size: 16px;
   margin: 0 6px 0 12px;
+}
+.user-dropdown {
+  z-index: 1;
+  background-color: var(--primary);
+}
+
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.user-dropdown-item a{
+  margin-left: 5px;
+  color: white;
+  font-size: 17px;
+}
+.user-dropdown-item a:hover{
+
+  color: var(--accent);
+  
 }

@@ -814,26 +814,29 @@ body[data-theme="dark"] {
 .close{
   display: none;
 }
-@media screen and (max-width: 680px) {
-  .app-left{
-display: none;
+@media screen and (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    padding: 12px;
   }
-  .showing{
-    display: block;
-    padding: 30px;
+  
+  .app-left {
+    margin-right: 0;
+    margin-bottom: 24px;
   }
-  .app-right{
+  .app-profile-box{
     display: none;
   }
-  .app-container{
-    padding: 0;
+  .app-main {
+   
+    height: 70%;
+    margin-bottom: 24px;
   }
-  .chat-res{
-    display: block;
-    position: absolute;
-    right: 0;
+  
+  .chat-input-wrapper {
+    margin-bottom: 12px;
   }
-  }
+}
 .newgroup{
   display: flex;
   align-items: flex-end;
