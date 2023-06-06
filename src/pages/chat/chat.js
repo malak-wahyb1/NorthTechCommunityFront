@@ -8,8 +8,9 @@ function Chat() {
 
   return (
     <section className="chatComponent">
+        <SideBar/>
       <div className="app-container">
-       <SideBar/>
+     
         <div className="app-main">
           <ChatBox />
         </div>
