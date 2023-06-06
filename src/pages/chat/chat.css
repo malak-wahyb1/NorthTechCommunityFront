@@ -821,20 +821,32 @@ body[data-theme="dark"] {
   }
   
   .app-left {
+    display: none;
     margin-right: 0;
     margin-bottom: 24px;
+  }
+  .showing{
+    display: block;
+    margin-right: 0;
+    margin-bottom: 24px;
+    height: 100%;
   }
   .app-profile-box{
     display: none;
   }
   .app-main {
    
-    height: 70%;
+    height: 60%;
     margin-bottom: 24px;
   }
   
   .chat-input-wrapper {
     margin-bottom: 12px;
+  }
+  .chat-res{
+    display: block;
+    position: absolute;
+    right: 0;
   }
 }
 .newgroup{
