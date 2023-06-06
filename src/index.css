@@ -98,3 +98,10 @@ width: 95%;
 .css-k008qs{
 justify-content: center;
 }
+.css-mqt2s5{
+  color:var(--accent) !important;
+z-index: 1000;
+}
+.MuiInput-root input{
+  background-color: var(--primary) !important;
+}
